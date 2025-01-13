@@ -3,6 +3,24 @@
 /* Add Font Awesome */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 
+/* Breakpoints */
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
 /* Color System */
 :root {
   // Primary Colors
@@ -53,9 +71,25 @@ a {
 
 /* Global Styles */
 .container {
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
+
+  @media (min-width: map-get($breakpoints, sm)) {
+    max-width: 540px;
+  }
+  @media (min-width: map-get($breakpoints, md)) {
+    max-width: 720px;
+  }
+  @media (min-width: map-get($breakpoints, lg)) {
+    max-width: 960px;
+  }
+  @media (min-width: map-get($breakpoints, xl)) {
+    max-width: 1140px;
+  }
+  @media (min-width: map-get($breakpoints, xxl)) {
+    max-width: 1320px;
+  }
 }
 
 .btn {
@@ -138,6 +172,15 @@ a {
 
 html {
   scroll-behavior: smooth !important;
+  font-size: 16px;
+
+  @include respond-to(lg) {
+    font-size: 15px;
+  }
+
+  @include respond-to(md) {
+    font-size: 14px;
+  }
 }
 
 .section-header {
@@ -149,10 +192,15 @@ html {
     flex-direction: column;
     align-items: center;
     margin: 0;
+
     .category {
       color: #003366;
       font-size: 14px;
       margin-bottom: 4px;
+
+      @include respond-to(md) {
+        font-size: 12px;
+      }
     }
 
     .title {
@@ -160,12 +208,214 @@ html {
       text-transform: uppercase;
       color: #003366;
       margin-bottom: 10px;
+
+      @include respond-to(md) {
+        font-size: 1.5rem;
+      }
     }
 
     .underline {
       width: 60px;
       height: 2px;
       background: linear-gradient(to right, #005baa 50%, #e60012 50%);
+    }
+  }
+}
+
+/* Grid System */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.5rem;
+}
+
+.col {
+  flex: 1 0 0%;
+  padding: 0.5rem;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex: 0 0 auto;
+    width: percentage($i / 12);
+  }
+
+  @each $breakpoint, $value in $breakpoints {
+    .col-#{$breakpoint}-#{$i} {
+      @media (min-width: $value) {
+        flex: 0 0 auto;
+        width: percentage($i / 12);
+      }
+    }
+  }
+}
+
+/* Spacing Utilities */
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+@each $breakpoint, $value in $breakpoints {
+  @media (min-width: $value) {
+    @each $prop in (margin, padding) {
+      @each $size, $length in $spacers {
+        .#{str-slice($prop, 1, 1)}-#{$breakpoint}-#{$size} { #{$prop}: $length !important; }
+        .#{str-slice($prop, 1, 1)}t-#{$breakpoint}-#{$size} { #{$prop}-top: $length !important; }
+        .#{str-slice($prop, 1, 1)}r-#{$breakpoint}-#{$size} { #{$prop}-right: $length !important; }
+        .#{str-slice($prop, 1, 1)}b-#{$breakpoint}-#{$size} { #{$prop}-bottom: $length !important; }
+        .#{str-slice($prop, 1, 1)}l-#{$breakpoint}-#{$size} { #{$prop}-left: $length !important; }
+        .#{str-slice($prop, 1, 1)}x-#{$breakpoint}-#{$size} {
+          #{$prop}-right: $length !important;
+          #{$prop}-left: $length !important;
+        }
+        .#{str-slice($prop, 1, 1)}y-#{$breakpoint}-#{$size} {
+          #{$prop}-top: $length !important;
+          #{$prop}-bottom: $length !important;
+        }
+      }
+    }
+  }
+}
+
+/* Responsive Utilities */
+.hide {
+  display: none !important;
+}
+
+@each $breakpoint, $value in $breakpoints {
+  .hide-#{$breakpoint} {
+    @media (max-width: $value) {
+      display: none !important;
+    }
+  }
+  .show-#{$breakpoint} {
+    @media (min-width: $value) {
+      display: block !important;
+    }
+  }
+}
+
+.flex-column-reverse-mobile {
+  @include respond-to(md) {
+    flex-direction: column-reverse !important;
+  }
+}
+
+/* Responsive Typography */
+html {
+  font-size: 16px;
+
+  @include respond-to(lg) {
+    font-size: 15px;
+  }
+
+  @include respond-to(md) {
+    font-size: 14px;
+  }
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+
+  .main-title {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+
+    .category {
+      color: #003366;
+      font-size: 14px;
+      margin-bottom: 4px;
+
+      @include respond-to(md) {
+        font-size: 12px;
+      }
+    }
+
+    .title {
+      font-size: 2rem;
+      text-transform: uppercase;
+      color: #003366;
+      margin-bottom: 10px;
+
+      @include respond-to(md) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .underline {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, #005baa 50%, #e60012 50%);
+    }
+  }
+}
+
+/* Grid System */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.5rem;
+}
+
+.col {
+  flex: 1 0 0%;
+  padding: 0.5rem;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex: 0 0 auto;
+    width: percentage($i / 12);
+  }
+
+  @each $breakpoint, $value in $breakpoints {
+    .col-#{$breakpoint}-#{$i} {
+      @media (min-width: $value) {
+        flex: 0 0 auto;
+        width: percentage($i / 12);
+      }
+    }
+  }
+}
+
+/* Spacing Utilities */
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+@each $breakpoint, $value in $breakpoints {
+  @media (min-width: $value) {
+    @each $prop in (margin, padding) {
+      @each $size, $length in $spacers {
+        .#{str-slice($prop, 1, 1)}-#{$breakpoint}-#{$size} { #{$prop}: $length !important; }
+        .#{str-slice($prop, 1, 1)}t-#{$breakpoint}-#{$size} { #{$prop}-top: $length !important; }
+        .#{str-slice($prop, 1, 1)}r-#{$breakpoint}-#{$size} { #{$prop}-right: $length !important; }
+        .#{str-slice($prop, 1, 1)}b-#{$breakpoint}-#{$size} { #{$prop}-bottom: $length !important; }
+        .#{str-slice($prop, 1, 1)}l-#{$breakpoint}-#{$size} { #{$prop}-left: $length !important; }
+        .#{str-slice($prop, 1, 1)}x-#{$breakpoint}-#{$size} {
+          #{$prop}-right: $length !important;
+          #{$prop}-left: $length !important;
+        }
+        .#{str-slice($prop, 1, 1)}y-#{$breakpoint}-#{$size} {
+          #{$prop}-top: $length !important;
+          #{$prop}-bottom: $length !important;
+        }
+      }
     }
   }
 }
