@@ -16,7 +16,7 @@ interface Slide {
 export class SliderComponent implements OnInit, OnDestroy {
   slides: Slide[] = [
     {
-      image: 'https://www.gdufs.edu.cn/images/banner/banner4.png',
+      image: '../../../assets/logo/banner-1.png',
       title: 'Đại Học Ngoại Ngữ Ngoại Thương Quảng Đông',
       description: 'Đào tạo nhân tài chất lượng cao, đa ngành nghề với tầm nhìn quốc tế',
       primaryLink: '#',
