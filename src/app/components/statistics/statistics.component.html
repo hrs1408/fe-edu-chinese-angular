@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <div class="statistics-container">
+    <div class="logo">
+      <span>Đăng ký ngay</span>
+    </div>
+    <div class="bound">
+      <div class="center-circle">
+        <h2>DengfuChinese</h2>
+        <p>Số liệu</p>
+      </div>
+    </div>
+    <div class="stat-items">
+      <div
+        class="stat-item"
+        *ngFor="let stat of stats; let i = index"
+        [ngClass]="'item-' + (i + 1)"
+      >
+        <div class="text">
+          <div class="stat-number">
+            {{ stat.currentValue }}<span> {{ stat.unit }}</span>
+          </div>
+          <div class="stat-desc">{{ stat.description }}</div>
+        </div>
+        <div class="icon-circle">
+          <img
+            [src]="
+              'https://www.gdufs.edu.cn/images/list13_ico' + (5 - i) + '.png'
+            "
+            [alt]="stat.description"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="content">
+    50 dự án nghệ thuật tự do lớn hàng đầu trong các trường đại học Trung Quốc
+    Trường đại học của chúng tôi xếp thứ 23 Môn Ngôn ngữ và Văn học Trung Quốc
+    bên ngoài trường của tôi đứng thứ ba trong cả nước Thứ 3 trong cả nước!
+  </p>
+</div>

@@ -1,0 +1,34 @@
+<div class="activities-section">
+  <h2 class="section-title">HOẠT ĐỘNG HỌC TẬP TẠI DENGFU</h2>
+
+  <div class="activities-slider">
+    <div class="slider-container">
+      <div
+        class="slides"
+        [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+      >
+        <div class="slide" *ngFor="let activity of activities">
+          <div class="activity-card">
+            <img
+              [src]="activity.image"
+              alt="Student activities at DengfuChinese"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button class="nav-button prev" (click)="prev()">❮</button>
+      <button class="nav-button next" (click)="next()">❯</button>
+
+      <div class="dots">
+        <span
+          class="dot"
+          *ngFor="let i of [].constructor(totalSlides); let idx = index"
+          [class.active]="idx === currentIndex"
+          (click)="setCurrentSlide(idx)"
+          (keydown.enter)="setCurrentSlide(idx)"
+        ></span>
+      </div>
+    </div>
+  </div>
+</div>

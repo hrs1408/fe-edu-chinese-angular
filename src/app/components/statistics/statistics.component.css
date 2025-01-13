@@ -1,0 +1,283 @@
+.wrapper {
+  background-image: url("https://www.gdufs.edu.cn/images/container06_bg.jpg");
+  height: 100%;
+  padding: 40px 40px;
+}
+
+.wrapper .content {
+  max-width: 60%;
+  margin: 0 auto;
+  padding: 2rem;
+  color: white;
+  border-radius: 25px;
+}
+
+.statistics-container {
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 56, 118, 0.6), 0 0 0 0 rgba(0, 56, 118, 0.4), 0 0 0 0 rgba(0, 56, 118, 0.2);
+  }
+  25% {
+    box-shadow: 0 0 0 10px rgba(0, 56, 118, 0.5), 0 0 0 15px rgba(0, 56, 118, 0.3), 0 0 0 20px rgba(0, 56, 118, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(0, 56, 118, 0.4), 0 0 0 25px rgba(0, 56, 118, 0.2), 0 0 0 35px rgba(0, 56, 118, 0.05);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(0, 56, 118, 0), 0 0 0 35px rgba(0, 56, 118, 0), 0 0 0 50px rgba(0, 56, 118, 0);
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  z-index: 4;
+  border-radius: 50%;
+  background-color: rgba(0, 56, 118, 0.9);
+  background-image: url("https://www.gdufs.edu.cn/images/container06_box.png");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  overflow: hidden;
+}
+
+.logo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(0, 56, 118, 0.8) 0%, rgba(0, 56, 118, 0.95) 100%);
+  z-index: -1;
+}
+
+.logo span {
+  position: relative;
+  z-index: 2;
+}
+
+.logo:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  background-color: rgba(0, 56, 118, 0.95);
+}
+
+.bound {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  width: 775px;
+  margin: 0 auto;
+}
+
+.bound .center-circle {
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+  position: relative;
+  width: 280px;
+  height: 280px;
+  background-image: url("https://www.gdufs.edu.cn/images/container06_box.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 2;
+  box-shadow: 0 4px 15px rgba(0, 56, 118, 0.2);
+}
+
+.bound .center-circle:before {
+  content: "";
+  position: absolute;
+  top: -200px;
+  left: -240px;
+  right: -240px;
+  bottom: -240px;
+  border: 1px dashed #003876;
+  border-radius: 50%;
+}
+
+.bound .center-circle h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.2;
+  color: white;
+}
+
+.bound .center-circle p {
+  margin: 10px 0 0;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.stat-items {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 560px;
+  height: 560px;
+  z-index: 3;
+}
+
+.stat-item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 200px;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.stat-item:hover .stat-desc {
+  visibility: visible;
+  opacity: 1;
+}
+
+.stat-item.item-1 {
+  top: 65%;
+  right: -35%;
+}
+
+.stat-item.item-2 {
+  top: 15%;
+  right: -25%;
+}
+
+.stat-item.item-3 {
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.stat-item.item-4 {
+  top: 15%;
+  left: -25%;
+}
+
+.stat-item.item-5 {
+  top: 65%;
+  left: -35%;
+}
+
+.stat-number {
+  color: #003876;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-number span {
+  font-size: 1rem;
+  margin-left: 4px;
+}
+
+.stat-desc {
+  position: absolute;
+  background-color: rgba(0, 56, 118, 0.9);
+  color: white;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  max-width: 200px;
+  width: max-content;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stat-desc::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: rgba(0, 56, 118, 0.9) transparent transparent transparent;
+}
+
+.icon-circle {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 56, 118, 0.1);
+}
+
+.icon-circle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px dashed #003876;
+  border-radius: 50%;
+  animation: spin 20s linear infinite;
+}
+
+.icon-circle img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  transition: transform 0.6s;
+}
+
+.icon-circle:hover img {
+  transform: rotateY(360deg);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.content {
+  background-color: #003876;
+}

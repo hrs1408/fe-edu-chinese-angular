@@ -1,0 +1,8 @@
+.about-container {
+  padding: 20px;
+}
+
+.about-container .content {
+  margin-top: 20px;
+  line-height: 1.6;
+}

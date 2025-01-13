@@ -1,0 +1,84 @@
+<header [class.header-sticky]="isHeaderSticky">
+  <!-- Top utility bar -->
+  <div class="top-bar">
+    <div class="container">
+      <ul class="utility-nav">
+        <li><a href="#"><i class="fas fa-envelope"></i> Email</a></li>
+        <li><a href="#"><i class="fas fa-book"></i> Thư Viện</a></li>
+        <li><a href="#"><i class="fas fa-calendar"></i> Lịch</a></li>
+        <li><a href="#"><i class="fas fa-user-graduate"></i> Cựu SV</a></li>
+        <li><a href="#"><i class="fas fa-users"></i> Tuyển Dụng</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Dịch Vụ</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main header -->
+  <div class="main-header">
+    <div class="container">
+      <!-- Logo section -->
+      <div class="logo">
+        <img src="https://www.gdufs.edu.cn/images/logo.png" alt="GDUFS Logo">
+      </div>
+
+      <!-- Main navigation -->
+      <nav class="main-nav">
+        <ul>
+          <li>
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">TRANG CHỦ</a>
+          </li>
+          <li>
+            <a routerLink="/gioi-thieu" routerLinkActive="active">GIỚI THIỆU <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a routerLink="/gioi-thieu/tong-quan">Tổng Quan</a>
+              <a routerLink="/gioi-thieu/lich-su">Lịch Sử Phát Triển</a>
+              <a routerLink="/gioi-thieu/thanh-tuu">Thành Tựu</a>
+            </div>
+          </li>
+          <li>
+            <a routerLink="/khoa-hoc" routerLinkActive="active">KHÓA HỌC <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a routerLink="/khoa-hoc/tieng-trung">Tiếng Trung</a>
+              <a routerLink="/khoa-hoc/van-hoa">Văn Hóa</a>
+              <a routerLink="/khoa-hoc/kinh-te">Kinh Tế</a>
+            </div>
+          </li>
+          <li>
+            <a routerLink="/du-hoc-trung-quoc" routerLinkActive="active">DU HỌC TRUNG QUỐC <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a routerLink="/du-hoc-trung-quoc/thong-tin">Thông Tin</a>
+              <a routerLink="/du-hoc-trung-quoc/hoc-bong">Học Bổng</a>
+              <a routerLink="/du-hoc-trung-quoc/truong">Các Trường</a>
+            </div>
+          </li>
+          <li>
+            <a routerLink="/tai-lieu" routerLinkActive="active">TÀI LIỆU <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a routerLink="/tai-lieu/giao-trinh">Giáo Trình</a>
+              <a routerLink="/tai-lieu/tai-nguyen">Tài Nguyên</a>
+              <a routerLink="/tai-lieu/thu-vien">Thư Viện</a>
+            </div>
+          </li>
+          <li>
+            <a routerLink="/hsk" routerLinkActive="active">HSK <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a routerLink="/hsk/thong-tin">Thông Tin</a>
+              <a routerLink="/hsk/lich-thi">Lịch Thi</a>
+              <a routerLink="/hsk/on-tap">Ôn Tập</a>
+            </div>
+          </li>
+          <li>
+            <a routerLink="/tin-tuc" routerLinkActive="active">TIN TỨC</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Right section -->
+      <div class="header-right">
+        <div class="search-icon">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

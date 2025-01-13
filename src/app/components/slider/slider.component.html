@@ -1,0 +1,24 @@
+<div class="slider-container">
+  <div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="currentSlide === i">
+    <!-- Background image -->
+    <div class="slide-bg" [style.background-image]="'url(' + slide.image + ')'"></div>
+  </div>
+
+  <!-- Navigation arrows -->
+  <div class="slider-nav">
+    <button (click)="prevSlide()" title="Slide trước">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button (click)="nextSlide()" title="Slide tiếp theo">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Slide indicators -->
+  <div class="slide-indicators">
+    <button *ngFor="let slide of slides; let i = index"
+            [class.active]="currentSlide === i"
+            (click)="goToSlide(i)">
+    </button>
+  </div>
+</div>

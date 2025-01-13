@@ -1,0 +1,122 @@
+<div class="section-container">
+  <div class="section-header">
+    <h2 class="main-title">
+      <span class="category">TUYỂN DỤNG</span>
+      <span class="title">Đăng ký và cơ hội việc làm</span>
+      <span class="underline"></span>
+    </h2>
+  </div>
+
+  <div class="info-section">
+    <div class="content-wrapper">
+      <div class="left-column">
+        <div class="info-buttons">
+          <button class="info-button">
+            <img
+              src="https://www.gdufs.edu.cn/images/list7_ico1.png"
+              alt="Đại học"
+            />
+            <span>Tuyển sinh đại học</span>
+          </button>
+          <button class="info-button">
+            <img
+              src="https://www.gdufs.edu.cn/images/list7_ico2.png"
+              alt="Sau đại học"
+            />
+            <span>Tuyển sinh sau đại học</span>
+          </button>
+          <button class="info-button">
+            <img
+              src="https://www.gdufs.edu.cn/images/list7_ico3.png"
+              alt="Du học"
+            />
+            <span>Tuyển sinh đại học</span>
+            <small>(Cơ sở đào tạo du học)</small>
+          </button>
+          <button class="info-button">
+            <img
+              src="https://www.gdufs.edu.cn/images/list7_ico4.png"
+              alt="Hướng nghiệp"
+            />
+            <span>Hướng nghiệp</span>
+          </button>
+        </div>
+
+        <div class="info-video">
+          <video controls>
+            <source
+              src="https://www.gdufs.edu.cn/__local/E/49/44/21B28ADA12EA7FC095F0B7778EA_96326158_29C0D9FA.mp4?e=.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+          <h3 class="section-title" style="text-align: center">
+            ĐĂNG KÝ TƯ VẤN LỊCH KHAI GIẢNG THÁNG {{ currentMonth }}
+          </h3>
+          <div class="form-group">
+            <input
+              type="text"
+              formControlName="fullName"
+              placeholder="Họ và Tên"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              formControlName="birthYear"
+              placeholder="Năm sinh"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="tel"
+              formControlName="phone"
+              placeholder="Số điện thoại liên hệ"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="tel"
+              formControlName="zalo"
+              placeholder="Số điện thoại zalo"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <select formControlName="course" class="form-control">
+              <option value="">Khóa học quan tâm</option>
+              <option *ngFor="let course of courses" [value]="course">
+                {{ course }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select formControlName="studyType" class="form-control">
+              <option value="">Hình thức học mong muốn</option>
+              <option *ngFor="let type of studyTypes" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn">GỬI</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

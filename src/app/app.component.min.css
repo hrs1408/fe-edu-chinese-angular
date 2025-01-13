@@ -1,0 +1,1 @@
+.app-container{min-height:100vh;display:flex;flex-direction:column;background-color:var(--white)}.app-container main{flex:1;background-color:var(--neutral-100)}:host ::ng-deep app-header{background-color:var(--primary-dark);color:var(--white);box-shadow:0 2px 4px rgba(0,0,0,0.1)}:host ::ng-deep app-footer{background-color:var(--primary-dark);color:var(--white)}

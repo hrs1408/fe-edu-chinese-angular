@@ -1,0 +1,111 @@
+.activities-section {
+  padding: 60px 0;
+  background-color: #003366;
+}
+
+.activities-section .section-title {
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.activities-slider {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+}
+
+.activities-slider .slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.activities-slider .slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  margin: 0 -10px;
+}
+
+.activities-slider .slide {
+  flex: 0 0 33.333%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.activities-slider .activity-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.activities-slider .activity-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.activities-slider .nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+  z-index: 2;
+}
+
+.activities-slider .nav-button:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.activities-slider .nav-button.prev {
+  left: 10px;
+}
+
+.activities-slider .nav-button.next {
+  right: 10px;
+}
+
+.activities-slider .dots {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.activities-slider .dots .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.activities-slider .dots .dot.active {
+  background: white;
+}
+
+@media (max-width: 768px) {
+  .activities-section .section-title {
+    font-size: 1.5rem;
+  }
+  .activities-slider {
+    padding: 0 20px;
+  }
+  .activities-slider .slide {
+    flex: 0 0 100%;
+  }
+  .activities-slider .activity-card img {
+    height: 200px;
+  }
+}

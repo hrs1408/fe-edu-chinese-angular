@@ -1,1 +1,171 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Add Font Awesome */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+
+/* Color System */
+:root {
+  // Primary Colors
+  --primary-dark: #003366; // Dark blue for header/footer background
+  --primary-main: #0066cc; // Main blue for links and buttons
+  --primary-light: #e6f0ff; // Light blue for backgrounds
+
+  // Secondary Colors
+  --secondary-main: #ff9900; // Orange for CTAs and highlights
+  --secondary-light: #fff4e6; // Light orange for hover states
+
+  // Neutral Colors
+  --neutral-900: #1a1a1a; // Text color
+  --neutral-700: #4d4d4d; // Secondary text
+  --neutral-500: #808080; // Disabled text
+  --neutral-300: #cccccc; // Borders
+  --neutral-100: #f5f5f5; // Background
+  --white: #ffffff;
+}
+
+/* Typography */
+body {
+  margin: 0;
+  font-family: "Montserrat", serif;
+  color: var(--neutral-900);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--primary-dark);
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--primary-main);
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--secondary-main);
+  }
+}
+
+/* Global Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &-primary {
+    background-color: var(--primary-main);
+    color: var(--white);
+    border: none;
+
+    &:hover {
+      background-color: var(--primary-dark);
+    }
+  }
+
+  &-secondary {
+    background-color: var(--secondary-main);
+    color: var(--white);
+    border: none;
+
+    &:hover {
+      background-color: darken(#ff9900, 10%);
+    }
+  }
+
+  &-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-main);
+    color: var(--primary-main);
+
+    &:hover {
+      background-color: var(--primary-main);
+      color: var(--white);
+    }
+  }
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--primary-main);
+}
+.text-secondary {
+  color: var(--secondary-main);
+}
+.bg-primary {
+  background-color: var(--primary-dark);
+}
+.bg-light {
+  background-color: var(--neutral-100);
+}
+.text-center {
+  text-align: center;
+}
+
+/* Animation Utilities */
+.hover-lift {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth !important;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+
+  .main-title {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    .category {
+      color: #003366;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .title {
+      font-size: 2rem;
+      text-transform: uppercase;
+      color: #003366;
+      margin-bottom: 10px;
+    }
+
+    .underline {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, #005baa 50%, #e60012 50%);
+    }
+  }
+}

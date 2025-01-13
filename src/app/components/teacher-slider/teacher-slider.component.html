@@ -1,0 +1,49 @@
+<div class="teacher-slider">
+  <div class="section-header">
+    <h2 class="main-title">
+      <span class="title">Đội ngũ giảng viên</span>
+      <span class="underline"></span>
+    </h2>
+  </div>
+
+  <div class="slider-container" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+    <button class="nav-button prev" (click)="prev()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <div class="teachers-wrapper">
+      <div class="teachers">
+        <div class="teacher" *ngFor="let teacher of teachers; let i = index"
+             [class.active]="i === currentIndex"
+             [class.prev]="i === currentIndex - 1 || (currentIndex === 0 && i === teachers.length - 1)"
+             [class.next]="i === currentIndex + 1 || (currentIndex === teachers.length - 1 && i === 0)">
+          <div class="teacher-image">
+            <img [src]="teacher.image" [alt]="teacher.name">
+          </div>
+          <h3 class="teacher-name">{{teacher.name}}</h3>
+          <div class="description-wrapper" *ngIf="teacher.description && i === currentIndex">
+            <div class="teacher-description"
+                 (mouseenter)="onDescriptionHover(true)"
+                 (mouseleave)="onDescriptionHover(false)">
+              <p class="truncated-text">{{teacher.description}}</p>
+              <span class="read-more">(Di chuột để xem thêm)</span>
+              <div class="tooltip" [class.show]="showTooltip">
+                <div class="tooltip-content">
+                  <div class="tooltip-header">
+                    <h4>{{teacher.name}}</h4>
+                    <span class="close-tooltip" (click)="showTooltip = false">&times;</span>
+                  </div>
+                  <div class="tooltip-body">{{teacher.description}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="nav-button next" (click)="next()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
