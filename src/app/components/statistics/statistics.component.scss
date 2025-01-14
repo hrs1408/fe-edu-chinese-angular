@@ -100,13 +100,13 @@
   width: 775px;
   margin: 0 auto;
   .center-circle {
+    background: #003876;
     left: 50%;
     top: 70%;
     transform: translate(-50%, -50%);
     position: relative;
     width: 280px;
     height: 280px;
-    background-image: url("https://www.gdufs.edu.cn/images/container06_box.png");
     background-size: cover;
     background-position: center;
     border-radius: 50%;
@@ -117,7 +117,10 @@
     color: white;
     z-index: 2;
     box-shadow: 0 4px 15px rgba(0, 56, 118, 0.2);
-
+    img {
+      width: 100%;
+      height: 100%;
+    }
     //Làm cho border cách biên ra xa hơn
     &:before {
       content: "";

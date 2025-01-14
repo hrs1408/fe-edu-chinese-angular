@@ -14,11 +14,11 @@ interface StatItem {
 })
 export class StatisticsComponent implements OnInit {
   stats: StatItem[] = [
-    { value: 74, currentValue: 0, unit: 'ngành', description: 'Chuyên ngành đại học' },
-    { value: 29, currentValue: 0, unit: 'ngành', description: 'Chuyên ngành đại học hạng nhất cấp tỉnh' },
-    { value: 37, currentValue: 0, unit: 'ngành', description: 'Chuyên ngành đại học hạng nhất cấp quốc gia' },
-    { value: 2192, currentValue: 0, unit: 'người', description: 'Tổng số giáo viên và nhân viên' },
-    { value: 5748, currentValue: 0, unit: 'người', description: 'Nghiên cứu sinh tiến sĩ và thạc sĩ' }
+    { value: 74, currentValue: 0, unit: 'cấp độ', description: 'Các cấp độ đào tạo' },
+    { value: 29, currentValue: 0, unit: 'trường', description: 'Tổng số trường hợp tác' },
+    { value: 37, currentValue: 0, unit: 'giải thưởng', description: 'Thành tựu đạt được' },
+    { value: 2192, currentValue: 0, unit: 'người', description: 'Tổng số giáo viên' },
+    { value: 5748, currentValue: 0, unit: 'người', description: 'Tổng số học viên' }
   ];
 
   constructor() { }

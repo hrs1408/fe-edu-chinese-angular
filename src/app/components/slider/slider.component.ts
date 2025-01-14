@@ -23,7 +23,7 @@ export class SliderComponent implements OnInit, OnDestroy {
       secondaryLink: '#'
     },
     {
-      image: 'https://www.gdufs.edu.cn/images/banner/20231007.jpg',
+      image: '../../../assets/logo/banner-1.png',
       title: 'Khuôn Viên Xanh',
       description: 'Môi trường học tập hiện đại, năng động và sáng tạo',
       primaryLink: '#',

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  // Không cần loadFacebookSDK nữa
+  currentYear = new Date().getFullYear();
 }
