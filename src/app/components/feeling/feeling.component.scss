@@ -54,7 +54,6 @@
       .student-title {
         color: #666;
         font-size: 15px;
-        margin-bottom: 15px;
         font-weight: 500;
       }
 
@@ -76,5 +75,26 @@
       font-size: 28px;
       margin-bottom: 30px;
     }
+  }
+}
+
+
+.star-rating {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  color: #ddd;
+
+  &::before {
+    content: "★";
+  }
+
+  &.filled {
+    color: #ffd700; // Màu vàng cho sao đã được chọn
   }
 }

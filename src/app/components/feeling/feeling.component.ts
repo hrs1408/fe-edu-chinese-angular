@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swiper from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-
+import { FeelingService } from './feeling.service';
 Swiper.use([Navigation, Pagination, Autoplay]);
 
 @Component({
@@ -10,15 +10,16 @@ Swiper.use([Navigation, Pagination, Autoplay]);
   styleUrls: ['./feeling.component.scss']
 })
 export class FeelingComponent implements OnInit {
-  students = Array(10).fill({
-    image: 'https://fangfang.edu.vn/wp-content/uploads/2024/03/1-Nguyen-Hue.jpg',
-    name: 'Bạn Nguyễn Huệ',
-    title: 'Học viên khóa HSK',
-    text: 'Tôi đã có một thời gian học tập tuyệt vời tại trung tâm. Phương pháp giảng dạy rất hiệu quả.'
-  });
+  students: any[] = [];
 
-  constructor() { }
+  constructor(
+    private feelingService: FeelingService,
+  ) { }
 
   ngOnInit(): void {
+    this.feelingService.getReviews().subscribe((reviews: any) => {
+      this.students = reviews.data;
+      console.log(this.students);
+    });
   }
 }

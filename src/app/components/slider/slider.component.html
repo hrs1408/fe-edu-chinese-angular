@@ -1,7 +1,7 @@
 <div class="slider-container">
   <div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="currentSlide === i">
     <!-- Background image -->
-    <div class="slide-bg" [style.background-image]="'url(' + slide.image + ')'"></div>
+    <div class="slide-bg" [style.background-image]="'url(https://lh3.googleusercontent.com/d/' + slide.image.drive_id + ')'"></div>
   </div>
 
   <!-- Navigation arrows -->

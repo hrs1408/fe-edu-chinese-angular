@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import { SliderService } from './slider.service';
 interface Slide {
-  image: string;
+  image: any;
   title: string;
   description: string;
   primaryLink: string;
@@ -11,31 +11,19 @@ interface Slide {
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent implements OnInit, OnDestroy {
-  slides: Slide[] = [
-    {
-      image: '../../../assets/logo/banner-1.png',
-      title: 'Đại Học Ngoại Ngữ Ngoại Thương Quảng Đông',
-      description: 'Đào tạo nhân tài chất lượng cao, đa ngành nghề với tầm nhìn quốc tế',
-      primaryLink: '#',
-      secondaryLink: '#'
-    },
-    {
-      image: '../../../assets/logo/banner-1.png',
-      title: 'Khuôn Viên Xanh',
-      description: 'Môi trường học tập hiện đại, năng động và sáng tạo',
-      primaryLink: '#',
-      secondaryLink: '#'
-    }
-  ];
+  slides: Slide[] = [];
 
   currentSlide = 0;
   private autoSlideInterval: any;
   private readonly AUTO_SLIDE_INTERVAL = 8000; // 8 seconds for better viewing experience
 
+  constructor(private sliderService: SliderService) {}
+
   ngOnInit() {
+    this.getBanners();
     this.startAutoSlide();
   }
 
@@ -43,11 +31,19 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.stopAutoSlide();
   }
 
+  getBanners() {
+    this.sliderService.getBanners().subscribe((banners) => {
+      this.slides = banners.data;
+      console.log(this.slides);
+    });
+  }
+
   startAutoSlide() {
     this.autoSlideInterval = setInterval(() => {
       this.nextSlide();
     }, this.AUTO_SLIDE_INTERVAL);
   }
+
 
   stopAutoSlide() {
     if (this.autoSlideInterval) {
@@ -66,7 +62,8 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   prevSlide() {
-    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+    this.currentSlide =
+      (this.currentSlide - 1 + this.slides.length) % this.slides.length;
     this.resetAutoSlide();
   }
 

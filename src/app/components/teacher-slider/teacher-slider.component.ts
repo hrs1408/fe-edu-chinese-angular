@@ -1,11 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
-interface Teacher {
-  id: number;
-  name: string;
-  image: string;
-  description?: string;
-}
+import { TeacherSliderService } from './teacher-slider.service';
 
 @Component({
   selector: 'app-teacher-slider',
@@ -13,45 +7,31 @@ interface Teacher {
   styleUrls: ['./teacher-slider.component.scss']
 })
 export class TeacherSliderComponent implements OnInit, OnDestroy {
-  teachers: Teacher[] = [
-    {
-      id: 1,
-      name: 'Đặng Phước Bảo Bảo',
-      image: '../../../assets/image.png',
-      description: 'Nghiên Cứu sinh Thạc sĩ Đặng Phước Bảo Bảo Thạc Sĩ Đặng Phước Bảo Bảo với hơn nhiều năm kinh dạy học và đồng thời là người sáng lập ra Trung Tâm Tiếng Trung Dengfu , và cũng là giáo viên chính trong đội ngũ Giảng Viện tại Trung tâm .Có gần 4 năm sinh sống và học tập tại Trung Quốc . Tốt nghiệp loại xuất sắc 3.93/4.0 hệ Đại Học ở Quảng Châu và là nghiên cứu sinh Thạc Sĩ tại Quảng châu .'
-    },
-    {
-      id: 2,
-      name: 'Đặng Phước Bảo Bảo',
-      image: '../../../assets/image.png',
-      description: 'Nghiên Cứu sinh Thạc sĩ Đặng Phước Bảo Bảo Thạc Sĩ Đặng Phước Bảo Bảo với hơn nhiều năm kinh dạy học và đồng thời là người sáng lập ra Trung Tâm Tiếng Trung Dengfu , và cũng là giáo viên chính trong đội ngũ Giảng Viện tại Trung tâm .Có gần 4 năm sinh sống và học tập tại Trung Quốc . Tốt nghiệp loại xuất sắc 3.93/4.0 hệ Đại Học ở Quảng Châu và là nghiên cứu sinh Thạc Sĩ tại Quảng châu .'
-    },
-    {
-      id: 3,
-      name: 'Đặng Phước Bảo Bảo',
-      image: '../../../assets/image.png',
-      description: 'Nghiên Cứu sinh Thạc sĩ Đặng Phước Bảo Bảo Thạc Sĩ Đặng Phước Bảo Bảo với hơn nhiều năm kinh dạy học và đồng thời là người sáng lập ra Trung Tâm Tiếng Trung Dengfu , và cũng là giáo viên chính trong đội ngũ Giảng Viện tại Trung tâm .Có gần 4 năm sinh sống và học tập tại Trung Quốc . Tốt nghiệp loại xuất sắc 3.93/4.0 hệ Đại Học ở Quảng Châu và là nghiên cứu sinh Thạc Sĩ tại Quảng châu .'
-    },
-    {
-      id: 4,
-      name: 'Đặng Phước Bảo Bảo',
-      image: '../../../assets/image.png',
-      description: 'Nghiên Cứu sinh Thạc sĩ Đặng Phước Bảo Bảo Thạc Sĩ Đặng Phước Bảo Bảo với hơn nhiều năm kinh dạy học và đồng thời là người sáng lập ra Trung Tâm Tiếng Trung Dengfu , và cũng là giáo viên chính trong đội ngũ Giảng Viện tại Trung tâm .Có gần 4 năm sinh sống và học tập tại Trung Quốc . Tốt nghiệp loại xuất sắc 3.93/4.0 hệ Đại Học ở Quảng Châu và là nghiên cứu sinh Thạc Sĩ tại Quảng châu .'
-    }
-  ];
+  teachers: any[] = [];
 
   currentIndex = 2;
   title = 'NHÂN VẬT';
   showTooltip = false;
   private autoSlideInterval: any;
 
+  constructor(private teacherSliderService: TeacherSliderService) {}
+
   ngOnInit() {
+    this.getTeachers();
     this.startAutoSlide();
   }
+
 
   ngOnDestroy() {
     this.stopAutoSlide();
   }
+
+  getTeachers() {
+    this.teacherSliderService.getTeachers().subscribe((teachers) => {
+      this.teachers = teachers.data;
+    });
+  }
+
 
   onDescriptionHover(isHovering: boolean) {
     this.showTooltip = isHovering;

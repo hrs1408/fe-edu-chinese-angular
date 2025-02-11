@@ -31,11 +31,13 @@
     >
       <swiper-slide *ngFor="let student of students">
         <div class="card">
-          <img [src]="student.image" [alt]="student.name" class="student-image">
+          <img [src]="'https://lh3.googleusercontent.com/d/' + student.image?.drive_id" [alt]="student.name_reviewer" class="student-image">
           <div class="card-content">
-            <h3 class="student-name">{{student.name}}</h3>
-            <p class="student-title">{{student.title}}</p>
-            <p class="testimonial-text">{{student.text}}</p>
+            <h3 class="student-name">{{student.name_reviewer}}</h3>
+            <div class="star-rating">
+              <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= student.rating"></span>
+            </div>
+            <p class="testimonial-text">{{student.content_reviewer}}</p>
           </div>
         </div>
       </swiper-slide>

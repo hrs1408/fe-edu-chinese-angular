@@ -3,9 +3,7 @@
   <div class="top-bar">
     <div class="container">
       <ul class="utility-nav">
-        <li><a href="#"><i class="fas fa-envelope"></i> Email</a></li>
-        <li><a href="#"><i class="fas fa-users"></i> Tuyển Dụng</a></li>
-        <li><a href="#"><i class="fas fa-cog"></i> Quản trị</a></li>
+        <li><a href="http://admin.dengfuchinese.asia/" target="_blank" ><i class="fas fa-cog"></i> Quản trị</a></li>
       </ul>
     </div>
   </div>
@@ -27,43 +25,35 @@
           <li>
             <a routerLink="/gioi-thieu" routerLinkActive="active">GIỚI THIỆU <i class="fas fa-chevron-down"></i></a>
             <div class="dropdown-menu">
-              <a routerLink="/gioi-thieu/tong-quan">Tổng Quan</a>
-              <a routerLink="/gioi-thieu/lich-su">Lịch Sử Phát Triển</a>
-              <a routerLink="/gioi-thieu/thanh-tuu">Thành Tựu</a>
+              <a *ngFor="let category of categoriesIntruction" [routerLink]="['/gioi-thieu', category.id]">{{category.ct_name}}</a>
             </div>
           </li>
           <li>
             <a routerLink="/khoa-hoc" routerLinkActive="active">KHÓA HỌC <i class="fas fa-chevron-down"></i></a>
             <div class="dropdown-menu">
-              <a routerLink="/khoa-hoc/tieng-trung">Tiếng Trung</a>
-              <a routerLink="/khoa-hoc/van-hoa">Văn Hóa</a>
-              <a routerLink="/khoa-hoc/kinh-te">Kinh Tế</a>
+              <a *ngFor="let category of categoriesCourse" [routerLink]="['/khoa-hoc', category.id]">{{category.ct_name}}</a>
             </div>
           </li>
           <li>
             <a routerLink="/du-hoc-trung-quoc" routerLinkActive="active">DU HỌC TRUNG QUỐC <i class="fas fa-chevron-down"></i></a>
             <div class="dropdown-menu">
-              <a routerLink="/du-hoc-trung-quoc/thong-tin">Thông Tin</a>
-              <a routerLink="/du-hoc-trung-quoc/hoc-bong">Học Bổng</a>
-              <a routerLink="/du-hoc-trung-quoc/truong">Các Trường</a>
+              <a *ngFor="let category of categoriesDuHoc" [routerLink]="['/du-hoc-trung-quoc', category.id]">{{category.ct_name}}</a>
             </div>
           </li>
           <li>
             <a routerLink="/tai-lieu" routerLinkActive="active">TÀI LIỆU <i class="fas fa-chevron-down"></i></a>
             <div class="dropdown-menu">
-              <a routerLink="/tai-lieu/giao-trinh">Giáo Trình</a>
-              <a routerLink="/tai-lieu/tai-nguyen">Tài Nguyên</a>
-              <a routerLink="/tai-lieu/thu-vien">Thư Viện</a>
+              <a *ngFor="let category of categoriesDocument" [routerLink]="['/tai-lieu', category.id]">{{category.ct_name}}</a>
             </div>
           </li>
-          <li>
+          <!-- <li>
             <a routerLink="/hsk" routerLinkActive="active">HSK <i class="fas fa-chevron-down"></i></a>
             <div class="dropdown-menu">
               <a routerLink="/hsk/thong-tin">Thông Tin</a>
               <a routerLink="/hsk/lich-thi">Lịch Thi</a>
               <a routerLink="/hsk/on-tap">Ôn Tập</a>
             </div>
-          </li>
+          </li> -->
           <li>
             <a routerLink="/tin-tuc" routerLinkActive="active">TIN TỨC</a>
           </li>
@@ -71,11 +61,11 @@
       </nav>
 
       <!-- Right section -->
-      <div class="header-right">
+      <!-- <div class="header-right">
         <div class="search-icon">
           <i class="fas fa-search"></i>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </header>

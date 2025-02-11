@@ -18,9 +18,9 @@
              [class.prev]="i === currentIndex - 1 || (currentIndex === 0 && i === teachers.length - 1)"
              [class.next]="i === currentIndex + 1 || (currentIndex === teachers.length - 1 && i === 0)">
           <div class="teacher-image">
-            <img [src]="teacher.image" [alt]="teacher.name">
+            <img [src]="'https://lh3.googleusercontent.com/d/' + teacher.image?.drive_id" [alt]="teacher.tc_name">
           </div>
-          <h3 class="teacher-name">{{teacher.name}}</h3>
+          <h3 class="teacher-name">{{teacher.tc_name}}</h3>
           <div class="description-wrapper" *ngIf="teacher.description && i === currentIndex">
             <div class="teacher-description"
                  (mouseenter)="onDescriptionHover(true)"
@@ -30,11 +30,12 @@
               <div class="tooltip" [class.show]="showTooltip">
                 <div class="tooltip-content">
                   <div class="tooltip-header">
-                    <h4>{{teacher.name}}</h4>
+                    <h4>{{teacher.tc_name}}</h4>
                     <span class="close-tooltip" (click)="showTooltip = false">&times;</span>
                   </div>
                   <div class="tooltip-body">{{teacher.description}}</div>
                 </div>
+
               </div>
             </div>
           </div>

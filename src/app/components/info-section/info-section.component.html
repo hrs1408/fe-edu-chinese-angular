@@ -54,7 +54,7 @@
       </div>
 
       <div class="right-column">
-        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <h3 class="section-title" style="text-align: center">
             ĐĂNG KÝ LỊCH KHAI GIẢNG THÁNG {{ currentMonth }}
           </h3>
@@ -114,7 +114,18 @@
               </option>
             </select>
           </div>
-          <button type="submit" class="submit-btn">GỬI</button>
+
+          <div *ngIf="submitSuccess" class="alert alert-success">
+            Đăng ký thành công!
+          </div>
+
+          <div *ngIf="submitError" class="alert alert-danger">
+            Có lỗi xảy ra. Vui lòng thử lại sau.
+          </div>
+
+          <button type="submit" class="submit-btn" [disabled]="!registerForm.valid || isSubmitting">
+            {{ isSubmitting ? 'Đang gửi...' : 'Đăng ký' }}
+          </button>
         </form>
       </div>
     </div>

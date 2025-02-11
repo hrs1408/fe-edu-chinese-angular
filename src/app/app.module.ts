@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivitiComponent } from './components/activiti/activiti.component';
 import { register } from 'swiper/element/bundle';
 import { FeelingComponent } from './components/feeling/feeling.component';
+import { HttpClientModule } from '@angular/common/http';
 
 register();
 
@@ -36,6 +37,7 @@ register();
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot([]),
     AppRoutingModule,
     ReactiveFormsModule,
