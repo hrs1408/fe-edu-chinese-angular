@@ -10,8 +10,8 @@
         <div class="slide" *ngFor="let activity of activities">
           <div class="activity-card">
             <img
-              [src]="activity.image"
-              alt="Student activities at DengfuChinese"
+              [src]="'https://lh3.googleusercontent.com/d/' + activity.drive_id"
+              alt="activity.title"
             />
           </div>
         </div>

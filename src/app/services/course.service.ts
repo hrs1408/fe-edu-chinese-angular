@@ -13,12 +13,12 @@ export class CourseService {
   constructor(private http: HttpClient) { }
 
   getCoursesByCategory(categoryId: number): Observable<CourseResponse> {
-    return this.http.get<CourseResponse>(`${this.apiUrl}/course/list-by-course-category`, {
+    return this.http.get<CourseResponse>(`${this.apiUrl}course/list-by-course-category`, {
       params: { course_category: categoryId.toString() }
     });
   }
 
   getCourseById(courseId: number): Observable<CourseResponse> {
-    return this.http.get<CourseResponse>(`${this.apiUrl}/course/${courseId}`);
+    return this.http.get<CourseResponse>(`${this.apiUrl}course/by-id/${courseId}`);
   }
 }

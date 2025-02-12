@@ -12,7 +12,7 @@ interface CategoryInfo {
 }
 
 interface CategoryWithCourses extends Category {
-  courses?: Course[];
+  courses?: any[];
   isLoadingCourses?: boolean;
   courseError?: string;
 }
@@ -140,5 +140,9 @@ export class CoursesComponent implements OnInit {
       return course.course_name;
     }
     return course.course_name.includes('1') ? 'Cơ bản' : 'Nâng cao';
+  }
+
+  getImageUrl(image: any): string {
+    return `https://lh3.googleusercontent.com/d/${image.drive_id}`;
   }
 }

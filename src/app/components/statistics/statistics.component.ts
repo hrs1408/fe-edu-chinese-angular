@@ -50,4 +50,11 @@ export class StatisticsComponent implements OnInit {
 
     animate();
   }
+
+  scrollToInfoSection() {
+    const infoSection = document.getElementById('info-section');
+    if (infoSection) {
+      infoSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }

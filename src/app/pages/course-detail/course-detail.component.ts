@@ -69,4 +69,8 @@ export class CourseDetailComponent implements OnInit {
       currency: 'VND'
     }).format(price);
   }
+
+  getImageUrl(image: any): string {
+    return `https://lh3.googleusercontent.com/d/${image.drive_id}`;
+  }
 }

@@ -362,3 +362,17 @@
     }
   }
 }
+
+.course-banner {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  img {
+    border-radius: 15px 15px 0 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+

@@ -13,7 +13,7 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategories(type: number): Observable<CategoryResponse> {
-    return this.http.get<CategoryResponse>(`${this.apiUrl}/category/list-by-type`, {
+    return this.http.get<CategoryResponse>(`${this.apiUrl}category/list-by-type`, {
       params: { ct_type: type.toString() }
     });
   }

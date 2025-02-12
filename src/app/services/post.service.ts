@@ -26,7 +26,7 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getPosts(page: number = 1, limit: number = 9): Observable<{data: Post[], total: number}> {
-    return this.http.get<{data: Post[], total: number}>(`${this.apiUrl}posts/list?page=${page}&limit=${limit}`);
+    return this.http.get<{data: Post[], total: number}>(`${this.apiUrl}posts/types/news?page=${page}&limit=${limit}`);
   }
 
   searchPosts(keyword: string): Observable<Post[]> {

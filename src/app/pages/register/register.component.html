@@ -31,7 +31,7 @@
   <!-- Register Form -->
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form" *ngIf="!isLoading && !error">
     <div class="form-group">
-      <label for="fullName">Họ và tên <span class="required">*</span></label>
+      <label for="fullName">Họ và Tên <span class="required">*</span></label>
       <input
         type="text"
         id="fullName"
@@ -41,6 +41,41 @@
       <div class="error-message" *ngIf="isFieldInvalid('fullName')">
         Vui lòng nhập họ và tên
       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="birthYear">Năm sinh <span class="required">*</span></label>
+      <input
+        type="number"
+        id="birthYear"
+        formControlName="birthYear"
+        [class.invalid]="isFieldInvalid('birthYear')"
+      >
+      <div class="error-message" *ngIf="isFieldInvalid('birthYear')">
+        Vui lòng nhập năm sinh hợp lệ
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Số điện thoại liên hệ <span class="required">*</span></label>
+      <input
+        type="tel"
+        id="phone"
+        formControlName="phone"
+        [class.invalid]="isFieldInvalid('phone')"
+      >
+      <div class="error-message" *ngIf="isFieldInvalid('phone')">
+        Vui lòng nhập số điện thoại hợp lệ
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="zalo">Số điện thoại zalo</label>
+      <input
+        type="tel"
+        id="zalo"
+        formControlName="zalo"
+      >
     </div>
 
     <div class="form-group">
@@ -57,25 +92,30 @@
     </div>
 
     <div class="form-group">
-      <label for="phone">Số điện thoại <span class="required">*</span></label>
+      <label for="interestedCourse">Khóa học quan tâm <span class="required">*</span></label>
       <input
-        type="tel"
-        id="phone"
-        formControlName="phone"
-        [class.invalid]="isFieldInvalid('phone')"
+        type="text"
+        id="interestedCourse"
+        formControlName="interestedCourse"
+        readonly
       >
-      <div class="error-message" *ngIf="isFieldInvalid('phone')">
-        Vui lòng nhập số điện thoại hợp lệ
-      </div>
     </div>
 
     <div class="form-group">
-      <label for="note">Ghi chú</label>
-      <textarea
-        id="note"
-        formControlName="note"
-        rows="4"
-      ></textarea>
+      <label for="studyForm">Hình thức học mong muốn <span class="required">*</span></label>
+      <select
+        id="studyForm"
+        formControlName="studyForm"
+        [class.invalid]="isFieldInvalid('studyForm')"
+      >
+        <option value="">Chọn hình thức học</option>
+        <option value="online">Học online</option>
+        <option value="offline">Học offline</option>
+        <option value="hybrid">Học kết hợp</option>
+      </select>
+      <div class="error-message" *ngIf="isFieldInvalid('studyForm')">
+        Vui lòng chọn hình thức học
+      </div>
     </div>
 
     <div class="form-actions">
@@ -85,7 +125,7 @@
       </button>
       <button type="submit" class="submit-button" [disabled]="registerForm.invalid || isSubmitting">
         <i class="fas fa-paper-plane"></i>
-        {{ isSubmitting ? 'Đang gửi...' : 'Gửi đăng ký' }}
+        {{ isSubmitting ? 'Đang gửi...' : 'Đăng ký' }}
       </button>
     </div>
   </form>

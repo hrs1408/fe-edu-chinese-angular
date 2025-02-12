@@ -13,7 +13,9 @@
     <div class="container">
       <!-- Logo section -->
       <div class="logo">
-        <img src="../../../assets/logo/ngang3-removebg.png" alt="GDUFS Logo">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <img src="../../../assets/logo/ngang3-removebg.png" alt="GDUFS Logo">
+        </a>
       </div>
 
       <!-- Main navigation -->
@@ -23,10 +25,12 @@
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">TRANG CHỦ</a>
           </li>
           <li>
-            <a routerLink="/gioi-thieu" routerLinkActive="active">GIỚI THIỆU <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-menu">
+            <a routerLink="/gioi-thieu" routerLinkActive="active">GIỚI THIỆU
+              <!-- <i class="fas fa-chevron-down"></i> -->
+            </a>
+            <!-- <div class="dropdown-menu">
               <a *ngFor="let category of categoriesIntruction" [routerLink]="['/gioi-thieu', category.id]">{{category.ct_name}}</a>
-            </div>
+            </div> -->
           </li>
           <li>
             <a routerLink="/khoa-hoc" routerLinkActive="active">KHÓA HỌC <i class="fas fa-chevron-down"></i></a>

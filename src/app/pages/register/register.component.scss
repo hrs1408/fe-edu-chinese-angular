@@ -112,26 +112,50 @@
       }
 
       input,
-      textarea {
+      textarea,
+      select {
+        box-sizing: border-box;
         width: 100%;
         padding: 0.8rem 1rem;
         border: 1px solid #ddd;
         border-radius: 8px;
         font-size: 1rem;
-        transition: all 0.3s ease;
+        background-color: #fff;
+        color: #333;
+        transition: border-color 0.2s ease-in-out;
 
         &:focus {
           outline: none;
-          border-color: var(--primary-dark);
-          box-shadow: 0 0 0 2px rgba(0, 91, 170, 0.1);
+          border-color: #4a90e2;
         }
 
         &.invalid {
-          border-color: #dc3545;
+          border-color: #ff4d4f;
+        }
 
-          &:focus {
-            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.1);
-          }
+        &:disabled {
+          background-color: #f5f5f5;
+          cursor: not-allowed;
+        }
+      }
+
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+        padding-right: 2.5rem;
+        cursor: pointer;
+
+        &::-ms-expand {
+          display: none;
+        }
+
+        option {
+          padding: 0.5rem;
         }
       }
 

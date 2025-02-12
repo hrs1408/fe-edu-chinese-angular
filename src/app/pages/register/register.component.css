@@ -1,0 +1,336 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.bg-header {
+  height: 250px;
+  width: 100%;
+  background: var(--primary-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-header::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%), linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+.bg-header::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: #f8f9fa;
+  transform: skewY(-3deg);
+}
+
+.register-container {
+  max-width: 800px;
+  position: relative;
+  margin: -100px auto 0;
+  z-index: 1;
+  padding: 0 1.5rem 3rem;
+}
+
+.register-container .register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.register-container .register-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.register-container .register-header p {
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.register-container .course-info {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.register-container .course-info h2 {
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.register-container .course-info .description {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.register-container .course-info .price {
+  color: var(--primary-dark);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.register-container .register-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.register-container .register-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.register-container .register-form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.register-container .register-form .form-group label .required {
+  color: #dc3545;
+  margin-left: 0.2rem;
+}
+
+.register-container .register-form .form-group input,
+.register-container .register-form .form-group textarea,
+.register-container .register-form .form-group select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.register-container .register-form .form-group input:focus,
+.register-container .register-form .form-group textarea:focus,
+.register-container .register-form .form-group select:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.register-container .register-form .form-group input.invalid,
+.register-container .register-form .form-group textarea.invalid,
+.register-container .register-form .form-group select.invalid {
+  border-color: #ff4d4f;
+}
+
+.register-container .register-form .form-group input:disabled,
+.register-container .register-form .form-group textarea:disabled,
+.register-container .register-form .form-group select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.register-container .register-form .form-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.register-container .register-form .form-group select::-ms-expand {
+  display: none;
+}
+
+.register-container .register-form .form-group select option {
+  padding: 0.5rem;
+}
+
+.register-container .register-form .form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.register-container .register-form .form-group .error-message {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.register-container .register-form .form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.register-container .register-form .form-actions button {
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.register-container .register-form .form-actions button i {
+  font-size: 1rem;
+}
+
+.register-container .register-form .form-actions button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.register-container .register-form .form-actions .cancel-button {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.register-container .register-form .form-actions .cancel-button:hover:not(:disabled) {
+  background: #e9ecef;
+}
+
+.register-container .register-form .form-actions .submit-button {
+  background: var(--primary-dark);
+  border: none;
+  color: white;
+}
+
+.register-container .register-form .form-actions .submit-button:hover:not(:disabled) {
+  background: #004077;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.loading-state .spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--primary-dark);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+.loading-state p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.error-state i {
+  font-size: 3rem;
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+.error-state p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-state .retry-button {
+  background: var(--primary-dark);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.error-state .retry-button:hover {
+  background: #004077;
+}
+
+.error-state .retry-button i {
+  font-size: 1rem;
+  color: white;
+  margin-right: 0.5rem;
+  margin-bottom: 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .bg-header {
+    height: 200px;
+  }
+  .register-container {
+    margin-top: -80px;
+    padding: 0 1rem 2rem;
+  }
+  .register-container .register-header {
+    padding: 1.5rem;
+  }
+  .register-container .register-header h1 {
+    font-size: 2rem;
+  }
+  .register-container .register-header p {
+    font-size: 1.1rem;
+  }
+  .register-container .course-info {
+    padding: 1.5rem;
+  }
+  .register-container .course-info h2 {
+    font-size: 1.5rem;
+  }
+  .register-container .register-form {
+    padding: 1.5rem;
+  }
+  .register-container .register-form .form-actions {
+    flex-direction: column;
+  }
+  .register-container .register-form .form-actions button {
+    width: 100%;
+  }
+  .register-container .register-form .form-actions .cancel-button {
+    order: 2;
+  }
+  .register-container .register-form .form-actions .submit-button {
+    order: 1;
+    margin-bottom: 1rem;
+  }
+}

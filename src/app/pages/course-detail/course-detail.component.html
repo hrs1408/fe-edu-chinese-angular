@@ -22,15 +22,24 @@
       <div class="course-header">
         <h1>{{ course.course_name }}</h1>
         <div class="course-meta">
+          <span class="course-id">
+            <i class="fas fa-hashtag"></i>
+            Mã khóa học: {{ course.id }}
+          </span>
           <span class="course-category">
             <i class="fas fa-folder"></i>
             {{ getCategoryName(course.course_category) }}
           </span>
-          <span class="course-level">
-            <i class="fas fa-layer-group"></i>
-            {{ getCourseLevel(course) }}
+          <span class="course-date">
+            <i class="fas fa-calendar"></i>
+            Ngày tạo: {{ course.created_at | date:'dd/MM/yyyy' }}
           </span>
         </div>
+      </div>
+
+      <!-- Course banner -->
+      <div class="course-banner" *ngIf="course.post?.image">
+        <img [src]="getImageUrl(course.post.image)" [alt]="course.course_name">
       </div>
 
       <!-- Course overview -->
@@ -41,25 +50,10 @@
         </div>
       </div>
 
-      <!-- Course benefits -->
-      <div class="course-section">
-        <h2>Bạn sẽ học được gì</h2>
-        <ul class="benefits-list">
-          <li><i class="fas fa-check"></i> Phát âm chuẩn và tự tin giao tiếp</li>
-          <li><i class="fas fa-check"></i> Nắm vững ngữ pháp cơ bản</li>
-          <li><i class="fas fa-check"></i> Từ vựng phong phú trong giao tiếp</li>
-          <li><i class="fas fa-check"></i> Kỹ năng nghe, nói, đọc, viết</li>
-        </ul>
-      </div>
-
-      <!-- Course requirements -->
-      <div class="course-section">
-        <h2>Yêu cầu khóa học</h2>
-        <ul class="requirements-list">
-          <li><i class="fas fa-arrow-right"></i> Không yêu cầu kiến thức tiếng Trung</li>
-          <li><i class="fas fa-arrow-right"></i> Máy tính có kết nối internet</li>
-          <li><i class="fas fa-arrow-right"></i> Tinh thần học tập nghiêm túc</li>
-        </ul>
+      <!-- Course content -->
+      <div class="course-section" *ngIf="course.post">
+        <h2>{{ course.post.title }}</h2>
+        <div class="course-post-content" [innerHTML]="course.post.content"></div>
       </div>
     </div>
 
@@ -74,11 +68,11 @@
         <div class="course-features">
           <div class="feature">
             <i class="fas fa-clock"></i>
-            <span>Thời lượng: 48 giờ học</span>
+            <span>Cập nhật: {{ course.updated_at | date:'dd/MM/yyyy' }}</span>
           </div>
           <div class="feature">
             <i class="fas fa-book"></i>
-            <span>Số bài học: 24 bài</span>
+            <span>Mã khóa học: {{ course.id }}</span>
           </div>
           <div class="feature">
             <i class="fas fa-certificate"></i>

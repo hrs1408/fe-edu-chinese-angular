@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { CourseService } from '../../services/course.service';
+import { ToastService } from '../../services/toast.service';
 import { Course } from '../../models/course';
 
 @Component({
@@ -19,9 +21,12 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup = this.fb.group({
     fullName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
+    birthYear: ['', [Validators.required]],
     phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-    note: ['']
+    zalo: [''],
+    email: ['', [Validators.required, Validators.email]],
+    interestedCourse: ['', [Validators.required]],
+    studyForm: ['', [Validators.required]]
   });
 
   constructor(
@@ -29,6 +34,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private location: Location,
     private courseService: CourseService,
+    private toastService: ToastService,
+    private http: HttpClient,
     private fb: FormBuilder
   ) {}
 
@@ -49,6 +56,9 @@ export class RegisterComponent implements OnInit {
     this.courseService.getCourseById(this.courseId).subscribe({
       next: (response) => {
         this.course = response.data;
+        this.registerForm.patchValue({
+          interestedCourse: this.course.course_name
+        });
         this.isLoading = false;
       },
       error: (error) => {
@@ -74,21 +84,37 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     if (this.registerForm.valid && !this.isSubmitting) {
       this.isSubmitting = true;
-      const formData = {
-        ...this.registerForm.value,
-        courseId: this.courseId
-      };
 
-      // TODO: Implement API call to submit registration
-      console.log('Form submitted:', formData);
+      const formData = new FormData();
 
-      // Simulate API call
-      setTimeout(() => {
-        this.isSubmitting = false;
-        // TODO: Handle success/error response
-        alert('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm.');
-        this.router.navigate(['/khoa-hoc']);
-      }, 1500);
+      // Map form fields to Google Form fields
+      formData.append('entry.1916054590', this.registerForm.value.fullName);
+      formData.append('entry.122846010', this.registerForm.value.birthYear);
+      formData.append('entry.1875805140', this.registerForm.value.phone);
+      formData.append('entry.1342236707', this.registerForm.value.zalo || '');
+      formData.append('entry.1689425395', this.registerForm.value.email);
+      formData.append('entry.841802827', this.course.course_name);
+      formData.append('entry.1596932414', this.registerForm.value.studyForm);
+
+      // Gửi form đến Google Forms
+      this.http
+        .post(
+          'https://docs.google.com/forms/d/e/1FAIpQLSdpnQQFsX2D9HQcVVuFjlQnmilykFvMV-lv9j9dE9DsM1J9Tw/formResponse',
+          formData
+        )
+        .subscribe({
+          next: () => {
+            this.isSubmitting = false;
+            this.toastService.success('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm.', 'Thành công');
+            this.router.navigate(['/khoa-hoc']);
+          },
+          error: () => {
+            // Google Form luôn trả về lỗi CORS nhưng vẫn submit thành công
+            this.isSubmitting = false;
+            this.toastService.success('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm.', 'Thành công');
+            this.router.navigate(['/khoa-hoc']);
+          }
+        });
     } else {
       Object.keys(this.registerForm.controls).forEach(key => {
         const control = this.registerForm.get(key);
@@ -96,6 +122,7 @@ export class RegisterComponent implements OnInit {
           control.markAsTouched();
         }
       });
+      this.toastService.error('Vui lòng điền đầy đủ thông tin bắt buộc');
     }
   }
 
