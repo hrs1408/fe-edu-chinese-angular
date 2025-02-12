@@ -1,0 +1,62 @@
+<div class="bg-header"></div>
+
+<div class="container mx-auto px-4 py-8" style="padding-bottom: 70px;">
+  <!-- Loading spinner -->
+  <div *ngIf="loading" class="flex justify-center my-8">
+    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+
+  <!-- Nội dung bài viết -->
+  <div *ngIf="!loading && post" class="post-content">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">{{post.title}}</h1>
+      <div class="mt-4 text-gray-600 flex items-center justify-center flex-wrap gap-4">
+        <span class="flex items-center">
+          <i class="far fa-calendar-alt mr-2"></i>
+          {{post.created_at | date:'dd/MM/yyyy'}}
+        </span>
+        <span class="flex items-center">
+          <i class="far fa-user mr-2"></i>
+          {{post.author}}
+        </span>
+        <span class="flex items-center">
+          <i class="far fa-eye mr-2"></i>
+          {{post.views}} lượt xem
+        </span>
+      </div>
+    </div>
+
+    <!-- Ảnh cover -->
+    <div class="cover-image mb-8">
+      <img [src]="'https://lh3.googleusercontent.com/d/' + post.image?.drive_id" [alt]="post.title" class="w-full rounded-lg shadow-lg">
+    </div>
+
+    <!-- Nội dung HTML -->
+    <div class="prose prose-lg mx-auto">
+      <div [innerHTML]="safeContent"></div>
+    </div>
+
+    <!-- Bài viết liên quan -->
+    <div *ngIf="relatedPosts.length > 0" class="related-posts mt-12">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Bài viết liên quan</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let relatedPost of relatedPosts"
+             class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105"
+             (click)="navigateToPost(relatedPost.id)">
+          <img [src]="'https://lh3.googleusercontent.com/d/' + relatedPost.image?.drive_id"
+               [alt]="relatedPost.title"
+               class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">{{relatedPost.title}}</h3>
+            <p class="text-gray-600 text-sm line-clamp-2">{{relatedPost.description}}</p>
+            <div class="mt-4 text-sm text-gray-500">
+              {{relatedPost.created_at | date:'dd/MM/yyyy'}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-info-section></app-info-section>

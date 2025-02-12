@@ -115,14 +115,6 @@
             </select>
           </div>
 
-          <div *ngIf="submitSuccess" class="alert alert-success">
-            Đăng ký thành công!
-          </div>
-
-          <div *ngIf="submitError" class="alert alert-danger">
-            Có lỗi xảy ra. Vui lòng thử lại sau.
-          </div>
-
           <button type="submit" class="submit-btn" [disabled]="!registerForm.valid || isSubmitting">
             {{ isSubmitting ? 'Đang gửi...' : 'Đăng ký' }}
           </button>

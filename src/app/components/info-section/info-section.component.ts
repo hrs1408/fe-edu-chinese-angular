@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { InfoService } from './info.service';
+import { ToastService } from '../../services/toast.service';
+
 interface NewsItem {
   text: string;
   textEn?: string;
@@ -27,7 +29,8 @@ export class InfoSectionComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly http: HttpClient,
-    private readonly infoService: InfoService
+    private readonly infoService: InfoService,
+    private readonly toastService: ToastService
   ) {
     this.currentMonth = new Date().getMonth() + 1;
     this.registerForm = this.fb.group({
@@ -48,7 +51,7 @@ export class InfoSectionComponent implements OnInit {
   getCategoriesCourse() {
     this.infoService.getCategoriesCourseById(20).subscribe((categories) => {
       this.categoriesCourse = categories.data;
-      this.courses = this.categoriesCourse.map((category) => category.ct_name);
+      this.courses = this.categoriesCourse.map((cat) => cat.ct_name);
     });
   }
 
@@ -79,26 +82,32 @@ export class InfoSectionComponent implements OnInit {
           next: () => {
             this.submitSuccess = true;
             this.isSubmitting = false;
+            this.toastService.success('Đăng ký thành công!');
+            this.resetForm();
           },
           error: () => {
+            // Google Form luôn trả về lỗi CORS nhưng vẫn submit thành công
             this.submitSuccess = true;
             this.isSubmitting = false;
-            this.registerForm.reset();
-            this.registerForm.patchValue({
-              fullName: '',
-              birthYear: '',
-              phone: '',
-              zalo: '',
-              email: '',
-              course: this.courses[0],
-              studyType: this.studyTypes[0],
-            });
-          },
-          complete: () => {
-            this.registerForm.reset();
-            this.isSubmitting = false;
+            this.toastService.success('Đăng ký thành công!');
+            this.resetForm();
           }
         });
+    } else {
+      this.toastService.error('Vui lòng điền đầy đủ thông tin bắt buộc');
     }
+  }
+
+  private resetForm(): void {
+    this.registerForm.reset();
+    this.registerForm.patchValue({
+      fullName: '',
+      birthYear: '',
+      phone: '',
+      zalo: '',
+      email: '',
+      course: this.courses[0],
+      studyType: this.studyTypes[0],
+    });
   }
 }
