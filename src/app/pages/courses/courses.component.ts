@@ -80,7 +80,6 @@ export class CoursesComponent implements OnInit {
         if (this.id) {
           this.categories = this.categories.filter(category => category.id == this.id);
         }
-        console.log(this.categories);
         this.categories.forEach(category => {
           this.loadCoursesForCategory(category);
         });
