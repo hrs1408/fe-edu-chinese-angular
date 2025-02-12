@@ -31,7 +31,7 @@
           <li>
             <a routerLink="/khoa-hoc" routerLinkActive="active">KHÓA HỌC <i class="fas fa-chevron-down"></i></a>
             <div class="dropdown-menu">
-              <a *ngFor="let category of categoriesCourse" [routerLink]="['/khoa-hoc', category.id]">{{category.ct_name}}</a>
+              <a *ngFor="let category of categoriesCourse" [routerLink]="['/khoa-hoc-by-type', category.id]">{{category.ct_name}}</a>
             </div>
           </li>
           <li>

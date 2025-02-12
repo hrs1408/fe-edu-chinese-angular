@@ -1,0 +1,106 @@
+<div class="bg-header"></div>
+
+<div class="course-detail-container">
+  <!-- Loading state -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Đang tải thông tin khóa học...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error-state">
+    <i class="fas fa-exclamation-circle"></i>
+    <p>{{ error }}</p>
+    <button (click)="loadCourseInfo()" class="retry-button">
+      <i class="fas fa-redo"></i> Thử lại
+    </button>
+  </div>
+
+  <!-- Course content -->
+  <div class="course-content" *ngIf="course && !isLoading && !error">
+    <div class="course-sections">
+      <div class="course-header">
+        <h1>{{ course.course_name }}</h1>
+        <div class="course-meta">
+          <span class="course-category">
+            <i class="fas fa-folder"></i>
+            {{ getCategoryName(course.course_category) }}
+          </span>
+          <span class="course-level">
+            <i class="fas fa-layer-group"></i>
+            {{ getCourseLevel(course) }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Course overview -->
+      <div class="course-section">
+        <h2>Tổng quan khóa học</h2>
+        <div class="course-description">
+          {{ course.description }}
+        </div>
+      </div>
+
+      <!-- Course benefits -->
+      <div class="course-section">
+        <h2>Bạn sẽ học được gì</h2>
+        <ul class="benefits-list">
+          <li><i class="fas fa-check"></i> Phát âm chuẩn và tự tin giao tiếp</li>
+          <li><i class="fas fa-check"></i> Nắm vững ngữ pháp cơ bản</li>
+          <li><i class="fas fa-check"></i> Từ vựng phong phú trong giao tiếp</li>
+          <li><i class="fas fa-check"></i> Kỹ năng nghe, nói, đọc, viết</li>
+        </ul>
+      </div>
+
+      <!-- Course requirements -->
+      <div class="course-section">
+        <h2>Yêu cầu khóa học</h2>
+        <ul class="requirements-list">
+          <li><i class="fas fa-arrow-right"></i> Không yêu cầu kiến thức tiếng Trung</li>
+          <li><i class="fas fa-arrow-right"></i> Máy tính có kết nối internet</li>
+          <li><i class="fas fa-arrow-right"></i> Tinh thần học tập nghiêm túc</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Course sidebar -->
+    <div class="course-sidebar">
+      <div class="course-card">
+        <div class="price-section">
+          <div class="price-label">Học phí</div>
+          <div class="course-price">{{ formatPrice(course.price) }}</div>
+        </div>
+
+        <div class="course-features">
+          <div class="feature">
+            <i class="fas fa-clock"></i>
+            <span>Thời lượng: 48 giờ học</span>
+          </div>
+          <div class="feature">
+            <i class="fas fa-book"></i>
+            <span>Số bài học: 24 bài</span>
+          </div>
+          <div class="feature">
+            <i class="fas fa-certificate"></i>
+            <span>Cấp chứng chỉ hoàn thành</span>
+          </div>
+        </div>
+
+        <button class="register-button" [routerLink]="['/dang-ky', course.id]">
+          <i class="fas fa-sign-in-alt"></i>
+          Đăng ký ngay
+        </button>
+
+        <div class="course-includes">
+          <h3>Khóa học bao gồm</h3>
+          <ul>
+            <li><i class="fas fa-video"></i> Video bài giảng</li>
+            <li><i class="fas fa-file-alt"></i> Tài liệu học tập</li>
+            <li><i class="fas fa-headset"></i> Hỗ trợ trực tuyến</li>
+            <li><i class="fas fa-mobile-alt"></i> Học mọi lúc, mọi nơi</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

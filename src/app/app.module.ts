@@ -23,6 +23,9 @@ import { StripHtmlPipe } from './pipes/strip-html.pipe';
 import { PostDetailComponent } from './pages/post-detail/post-detail.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { CoursesComponent } from './pages/courses/courses.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 
 register();
 
@@ -42,7 +45,10 @@ register();
     FeelingComponent,
     PostListComponent,
     StripHtmlPipe,
-    PostDetailComponent
+    PostDetailComponent,
+    CoursesComponent,
+    RegisterComponent,
+    CourseDetailComponent
   ],
   imports: [
     BrowserModule,

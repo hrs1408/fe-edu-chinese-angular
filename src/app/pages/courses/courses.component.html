@@ -1,0 +1,75 @@
+<div class="bg-header"></div>
+
+<div class="courses-container">
+  <div class="courses-header">
+    <h1>Các khóa học tiếng Trung</h1>
+    <p>Lựa chọn khóa học phù hợp với trình độ của bạn</p>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Đang tải danh sách khóa học...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error-state">
+    <i class="fas fa-exclamation-circle"></i>
+    <p>{{ error }}</p>
+    <button (click)="loadCategories()" class="retry-button">
+      <i class="fas fa-redo"></i> Thử lại
+    </button>
+  </div>
+
+  <!-- Content -->
+  <div class="course-categories" *ngIf="!isLoading && !error">
+    <div class="course-category" *ngFor="let category of categories">
+      <div class="category-header">
+        <i [class]="getCategoryIcon(category.ct_name)"></i>
+        <h2>{{ category.ct_name }}</h2>
+        <p>{{ getCategoryDescription(category.ct_name) }}</p>
+      </div>
+
+      <!-- Courses loading state -->
+      <div *ngIf="category.isLoadingCourses" class="courses-loading">
+        <div class="spinner"></div>
+        <p>Đang tải danh sách khóa học...</p>
+      </div>
+
+      <!-- Courses error state -->
+      <div *ngIf="category.courseError" class="courses-error">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>{{ category.courseError }}</p>
+        <button (click)="retryLoadCourses(category)" class="retry-button">
+          <i class="fas fa-redo"></i> Thử lại
+        </button>
+      </div>
+
+      <!-- Courses grid -->
+      <div class="courses-grid" *ngIf="!category.isLoadingCourses && !category.courseError">
+        <!-- No courses placeholder -->
+        <div class="course-card-placeholder" *ngIf="!category.courses?.length">
+          <i class="fas fa-plus-circle"></i>
+          <p>Chưa có khóa học nào trong danh mục này</p>
+        </div>
+
+        <!-- Course cards -->
+        <a [routerLink]="['/khoa-hoc-chi-tiet', course.id]" class="course-card" *ngFor="let course of category.courses">
+          <div class="course-content">
+            <h3>{{ course.course_name }}</h3>
+            <p>{{ course.description }}</p>
+            <div class="course-info">
+              <div class="price-wrapper">
+                <span class="price-label">Học phí:</span>
+                <span class="course-price">{{ formatPrice(course.price) }}</span>
+              </div>
+              <button class="register-button" [routerLink]="['/dang-ky', course.id]">
+                Đăng ký ngay
+              </button>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
