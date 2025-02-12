@@ -1,111 +1,315 @@
 .activities-section {
-  padding: 60px 0;
-  background-color: #003366;
+  padding: 4rem 0;
+  background-color: var(--neutral-100);
+  overflow: hidden;
+  width: 100%;
 }
 
 .activities-section .section-title {
   text-align: center;
-  color: white;
+  color: var(--primary-dark);
+  margin-bottom: 3rem;
   font-size: 2rem;
-  margin-bottom: 40px;
-  font-weight: bold;
+  font-weight: 600;
+  padding: 0 1rem;
+  line-height: 1.4;
 }
 
 .activities-slider {
+  position: relative;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 60px;
-  position: relative;
+  overflow: hidden;
+}
+
+.activities-slider .loading-state,
+.activities-slider .error-state {
+  text-align: center;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 12px;
+  margin: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.activities-slider .loading-state .spinner,
+.activities-slider .error-state .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--neutral-200);
+  border-top-color: var(--primary-dark);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+.activities-slider .loading-state p,
+.activities-slider .error-state p {
+  color: var(--neutral-700);
+  font-size: 0.9rem;
+}
+
+.activities-slider .error-state p {
+  color: var(--error);
 }
 
 .activities-slider .slider-container {
+  position: relative;
+  padding: 0 3rem;
+  margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
 .activities-slider .slides {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  margin: 0 -10px;
+  margin: 0 -0.5rem;
 }
 
 .activities-slider .slide {
-  flex: 0 0 33.333%;
-  padding: 0 10px;
+  flex: 0 0 calc(100% / 3);
+  width: calc(100% / 3);
+  padding: 0.5rem;
   box-sizing: border-box;
 }
 
 .activities-slider .activity-card {
-  background: white;
-  border-radius: 8px;
+  width: 100%;
+  background: var(--white);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  aspect-ratio: 16/9;
 }
 
 .activities-slider .activity-card img {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
-  display: block;
+  transition: transform 0.5s ease;
+}
+
+.activities-slider .activity-card:hover img {
+  transform: scale(1.05);
 }
 
 .activities-slider .nav-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--primary-dark);
+  color: var(--white);
   border: none;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 20px;
-  color: #333;
+  transition: all 0.3s ease;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  font-size: 1.2rem;
 }
 
 .activities-slider .nav-button:hover {
-  background: rgba(255, 255, 255, 0.9);
+  opacity: 1;
+  background: var(--primary-main);
 }
 
 .activities-slider .nav-button.prev {
-  left: 10px;
+  left: 0.5rem;
 }
 
 .activities-slider .nav-button.next {
-  right: 10px;
+  right: 0.5rem;
 }
 
 .activities-slider .dots {
-  text-align: center;
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
 }
 
 .activities-slider .dots .dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  margin: 0 5px;
+  background: var(--neutral-300);
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .activities-slider .dots .dot.active {
-  background: white;
+  background: var(--primary-dark);
+  transform: scale(1.2);
+}
+
+.activities-slider .dots .dot:hover {
+  background: var(--primary-main);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .activities-section {
+    padding: 3rem 0;
+  }
+  .activities-section .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+  }
+  .activities-slider .slider-container {
+    padding: 0 2.5rem;
+  }
+  .activities-slider .slide {
+    flex: 0 0 50%;
+    width: 50%;
+  }
+  .activities-slider .activity-card {
+    aspect-ratio: 4/3;
+  }
+  .activities-slider .nav-button.prev {
+    left: 0.25rem;
+  }
+  .activities-slider .nav-button.next {
+    right: 0.25rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .activities-section {
+    padding: 2.5rem 0;
+  }
+  .activities-section .section-title {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+  .activities-slider .slider-container {
+    padding: 0 2rem;
+  }
+  .activities-slider .nav-button {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  .activities-slider .activity-card {
+    aspect-ratio: 3/2;
+  }
 }
 
 @media (max-width: 768px) {
-  .activities-section .section-title {
-    font-size: 1.5rem;
+  .activities-section {
+    padding: 2rem 0;
   }
-  .activities-slider {
-    padding: 0 20px;
+  .activities-section .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+  .activities-slider .slider-container {
+    padding: 0 1.5rem;
   }
   .activities-slider .slide {
     flex: 0 0 100%;
+    width: 100%;
   }
-  .activities-slider .activity-card img {
-    height: 200px;
+  .activities-slider .activity-card {
+    aspect-ratio: 16/9;
+    max-height: 300px;
+  }
+  .activities-slider .nav-button {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+  .activities-slider .dots {
+    margin-top: 1rem;
+  }
+  .activities-slider .dots .dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  .activities-section {
+    padding: 1.5rem 0;
+  }
+  .activities-section .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding: 0 0.75rem;
+  }
+  .activities-slider .slider-container {
+    padding: 0 1rem;
+  }
+  .activities-slider .slides {
+    margin: 0 -0.25rem;
+  }
+  .activities-slider .slide {
+    padding: 0.25rem;
+  }
+  .activities-slider .activity-card {
+    border-radius: 8px;
+    aspect-ratio: 4/3;
+    max-height: 250px;
+  }
+  .activities-slider .nav-button {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  .activities-slider .nav-button.prev {
+    left: 0.15rem;
+  }
+  .activities-slider .nav-button.next {
+    right: 0.15rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .activities-section {
+    padding: 1rem 0;
+  }
+  .activities-section .section-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  .activities-slider .slider-container {
+    padding: 0 0.75rem;
+  }
+  .activities-slider .activity-card {
+    max-height: 200px;
+  }
+  .activities-slider .nav-button {
+    width: 25px;
+    height: 25px;
+    font-size: 0.7rem;
+  }
+  .activities-slider .nav-button.prev {
+    left: 0.1rem;
+  }
+  .activities-slider .nav-button.next {
+    right: 0.1rem;
+  }
+  .activities-slider .dots {
+    margin-top: 0.75rem;
+    gap: 0.4rem;
+  }
+  .activities-slider .dots .dot {
+    width: 5px;
+    height: 5px;
   }
 }

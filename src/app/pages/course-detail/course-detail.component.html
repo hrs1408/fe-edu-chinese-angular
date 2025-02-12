@@ -53,7 +53,9 @@
       <!-- Course content -->
       <div class="course-section" *ngIf="course.post">
         <h2>{{ course.post.title }}</h2>
-        <div class="course-post-content" [innerHTML]="course.post.content"></div>
+        <div class="content">
+          <div class="course-post-content" [innerHTML]="course.post.content"></div>
+        </div>
       </div>
     </div>
 

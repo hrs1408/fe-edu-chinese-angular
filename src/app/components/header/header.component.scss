@@ -290,51 +290,217 @@ header {
   }
 }
 
+// Mobile menu button
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  z-index: 1001;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Navigation wrapper for mobile
+.nav-wrapper {
+  @media (min-width: 993px) {
+    display: block !important;
+  }
+}
+
 // Responsive styles
 @media (max-width: 1200px) {
   .main-header {
-    .main-nav ul {
-      gap: 0.3rem;
+    .main-nav {
+      ul {
+        gap: 1rem;
 
-      li a {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.9rem;
+        li a {
+          font-size: 0.8rem;
+        }
       }
     }
   }
 }
 
 @media (max-width: 992px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--primary-dark);
+    padding: 5rem 0 2rem;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    z-index: 1000;
+
+    &.active {
+      right: 0;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-nav {
+      display: block;
+
+      ul {
+        flex-direction: column;
+        gap: 0;
+
+        li {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+          a {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            justify-content: space-between;
+
+            &:after {
+              display: none;
+            }
+
+            i {
+              transform: none !important;
+              transition: transform 0.3s ease;
+            }
+
+            &[aria-expanded="true"] i {
+              transform: rotate(-180deg) !important;
+            }
+          }
+
+          .dropdown-menu {
+            position: static;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            background-color: rgba(0, 0, 0, 0.2);
+            box-shadow: none;
+            margin: 0;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+
+            &:before {
+              display: none;
+            }
+
+            a {
+              color: white;
+              padding: 0.8rem 3rem;
+              font-size: 0.9rem;
+              opacity: 0.8;
+              border-bottom: none;
+
+              &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: white;
+                opacity: 1;
+              }
+            }
+          }
+
+          &:hover .dropdown-menu {
+            max-height: 500px;
+            transform: none;
+          }
+        }
+      }
+    }
+  }
+
+  .main-header {
+    background-color: var(--primary-dark);
+    padding: 0.8rem 0;
+    .logo {
+      img {
+        height: 40px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
   .top-bar {
     display: none;
   }
 
   .main-header {
-    background-color: rgba(0, 51, 102, 0.95);
-    padding: 0.8rem 0;
+    padding: 0.5rem 0;
+    .logo img {
+      height: 35px;
+    }
+  }
 
-    .logo {
-      img {
-        height: 40px;
+  .nav-wrapper {
+    width: 280px;
+    padding-top: 4rem;
+
+    .main-nav ul li {
+      a {
+        padding: 0.9rem 1.5rem;
+        font-size: 0.95rem;
       }
 
-      .logo-text {
-        h1 {
-          font-size: 1.5rem;
-        }
-      }
-    }
-
-    .main-nav {
-      display: none;
-    }
-
-    .header-right {
-      .lang-switch {
-        display: none;
+      .dropdown-menu a {
+        padding: 0.7rem 2.5rem;
+        font-size: 0.85rem;
       }
     }
   }
+}
+
+@media (max-width: 576px) {
+  .nav-wrapper {
+    width: 100%;
+
+    .main-nav ul li {
+      a {
+        padding: 1rem 1.5rem;
+      }
+
+      .dropdown-menu a {
+        padding: 0.8rem 2.5rem;
+      }
+    }
+  }
+
+  .main-header {
+    .logo img {
+      height: 32px;
+    }
+  }
+}
+
+// Overlay for mobile menu
+@media (max-width: 992px) {
+  .nav-wrapper.active:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+}
+
+// Prevent body scroll when mobile menu is open
+body.menu-open {
+  overflow: hidden;
 }
 
 .container {

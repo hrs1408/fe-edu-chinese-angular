@@ -18,51 +18,80 @@
         </a>
       </div>
 
-      <!-- Main navigation -->
-      <nav class="main-nav">
-        <ul>
-          <li>
-            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">TRANG CHỦ</a>
-          </li>
-          <li>
-            <a routerLink="/gioi-thieu" routerLinkActive="active">GIỚI THIỆU
-              <!-- <i class="fas fa-chevron-down"></i> -->
-            </a>
-            <!-- <div class="dropdown-menu">
-              <a *ngFor="let category of categoriesIntruction" [routerLink]="['/gioi-thieu', category.id]">{{category.ct_name}}</a>
-            </div> -->
-          </li>
-          <li>
-            <a routerLink="/khoa-hoc" routerLinkActive="active">KHÓA HỌC <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-menu">
-              <a *ngFor="let category of categoriesCourse" [routerLink]="['/khoa-hoc-by-type', category.id]">{{category.ct_name}}</a>
-            </div>
-          </li>
-          <li>
-            <a routerLink="/du-hoc-trung-quoc" routerLinkActive="active">DU HỌC TRUNG QUỐC <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-menu">
-              <a *ngFor="let category of categoriesDuHoc" [routerLink]="['/du-hoc-trung-quoc', category.id]">{{category.ct_name}}</a>
-            </div>
-          </li>
-          <li>
-            <a routerLink="/tai-lieu" routerLinkActive="active">TÀI LIỆU <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-menu">
-              <a *ngFor="let category of categoriesDocument" [routerLink]="['/tai-lieu', category.id]">{{category.ct_name}}</a>
-            </div>
-          </li>
-          <!-- <li>
-            <a routerLink="/hsk" routerLinkActive="active">HSK <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-menu">
-              <a routerLink="/hsk/thong-tin">Thông Tin</a>
-              <a routerLink="/hsk/lich-thi">Lịch Thi</a>
-              <a routerLink="/hsk/on-tap">Ôn Tập</a>
-            </div>
-          </li> -->
-          <li>
-            <a routerLink="/tin-tuc" routerLinkActive="active">TIN TỨC</a>
-          </li>
-        </ul>
-      </nav>
+      <!-- Mobile menu button -->
+      <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+        <i class="fas" [class.fa-bars]="!isMobileMenuOpen" [class.fa-times]="isMobileMenuOpen"></i>
+      </button>
+
+      <!-- Navigation wrapper -->
+      <div class="nav-wrapper" [class.active]="isMobileMenuOpen">
+        <!-- Main navigation -->
+        <nav class="main-nav">
+          <ul>
+            <li>
+              <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">TRANG CHỦ</a>
+            </li>
+            <li>
+              <a routerLink="/gioi-thieu" routerLinkActive="active">GIỚI THIỆU
+                <!-- <i class="fas fa-chevron-down"></i> -->
+              </a>
+              <!-- <div class="dropdown-menu">
+                <a *ngFor="let category of categoriesIntruction" [routerLink]="['/gioi-thieu', category.id]">{{category.ct_name}}</a>
+              </div> -->
+            </li>
+            <li>
+              <a routerLink="/khoa-hoc" routerLinkActive="active"
+                 [attr.aria-expanded]="isCourseMenuOpen">
+                KHÓA HỌC <i class="fas fa-chevron-down"></i>
+              </a>
+              <div class="dropdown-menu" [class.show]="isCourseMenuOpen">
+                <a *ngFor="let category of categoriesCourse"
+                   [routerLink]="['/khoa-hoc-by-type', category.id]"
+                   (click)="closeMobileMenu()">
+                  {{category.ct_name}}
+                </a>
+              </div>
+            </li>
+            <li>
+              <a routerLink="/du-hoc-trung-quoc" routerLinkActive="active"
+                 [attr.aria-expanded]="isDuHocMenuOpen">
+                DU HỌC TRUNG QUỐC <i class="fas fa-chevron-down"></i>
+              </a>
+              <div class="dropdown-menu" [class.show]="isDuHocMenuOpen">
+                <a *ngFor="let category of categoriesDuHoc"
+                   [routerLink]="['/du-hoc-trung-quoc', category.id]"
+                   (click)="closeMobileMenu()">
+                  {{category.ct_name}}
+                </a>
+              </div>
+            </li>
+            <li>
+              <a routerLink="/tai-lieu" routerLinkActive="active"
+                 [attr.aria-expanded]="isDocMenuOpen">
+                TÀI LIỆU <i class="fas fa-chevron-down"></i>
+              </a>
+              <div class="dropdown-menu" [class.show]="isDocMenuOpen">
+                <a *ngFor="let category of categoriesDocument"
+                   [routerLink]="['/tai-lieu', category.id]"
+                   (click)="closeMobileMenu()">
+                  {{category.ct_name}}
+                </a>
+              </div>
+            </li>
+            <!-- <li>
+              <a routerLink="/hsk" routerLinkActive="active">HSK <i class="fas fa-chevron-down"></i></a>
+              <div class="dropdown-menu">
+                <a routerLink="/hsk/thong-tin">Thông Tin</a>
+                <a routerLink="/hsk/lich-thi">Lịch Thi</a>
+                <a routerLink="/hsk/on-tap">Ôn Tập</a>
+              </div>
+            </li> -->
+            <li>
+              <a routerLink="/tin-tuc" routerLinkActive="active">TIN TỨC</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
       <!-- Right section -->
       <!-- <div class="header-right">

@@ -1,12 +1,16 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { HeaderService } from './header.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  isHeaderSticky = false;
+export class HeaderComponent implements OnInit, OnDestroy {
+  isHeaderSticky: boolean = false;
+  isMobileMenuOpen: boolean = false;
+  isCourseMenuOpen: boolean = false;
+  isDuHocMenuOpen: boolean = false;
+  isDocMenuOpen: boolean = false;
   categoriesCourse: any[] = [];
   categoriesDocument: any[] = [];
   categoriesIntruction: any[] = [];
@@ -59,5 +63,38 @@ export class HeaderComponent implements OnInit {
 
   toggleSearch() {
     // Implement search functionality
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    if (this.isMobileMenuOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      this.closeAllDropdowns();
+      document.body.classList.remove('menu-open');
+    }
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+    this.closeAllDropdowns();
+    document.body.classList.remove('menu-open');
+  }
+
+  private closeAllDropdowns() {
+    this.isCourseMenuOpen = false;
+    this.isDuHocMenuOpen = false;
+    this.isDocMenuOpen = false;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (window.innerWidth > 992 && this.isMobileMenuOpen) {
+      this.closeMobileMenu();
+    }
+  }
+
+  ngOnDestroy() {
+    document.body.classList.remove('menu-open');
   }
 }

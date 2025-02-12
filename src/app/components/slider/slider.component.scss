@@ -4,6 +4,14 @@
   height: 100vh;
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    height: 70vh;
+  }
+
+  @media (max-width: 480px) {
+    height: 50vh;
+  }
+
   .slide {
     position: absolute;
     top: 0;
@@ -34,19 +42,24 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 96%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 40px;
+    padding: 0 20px;
     z-index: 3;
     pointer-events: none;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+      padding: 0 10px;
+    }
 
     button {
       pointer-events: auto;
       width: 40px;
       height: 40px;
       border: none;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.8);
       color: #333;
       font-size: 1rem;
       cursor: pointer;
@@ -55,9 +68,35 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+
+      @media (max-width: 768px) {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      @media (max-width: 480px) {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+      }
 
       &:hover {
-        background: #fff;
+        background: rgba(255, 255, 255, 1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
       }
     }
   }
@@ -71,6 +110,20 @@
     display: flex;
     gap: 10px;
     z-index: 3;
+    padding: 0 10px;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+      bottom: 15px;
+      gap: 8px;
+    }
+
+    @media (max-width: 480px) {
+      bottom: 10px;
+      gap: 6px;
+    }
 
     button {
       width: 10px;
@@ -81,10 +134,20 @@
       cursor: pointer;
       padding: 0;
       transition: all 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+
+      @media (max-width: 480px) {
+        width: 8px;
+        height: 8px;
+      }
 
       &.active,
       &:hover {
         background: #fff;
+      }
+
+      &:active {
+        transform: scale(0.95);
       }
     }
   }

@@ -1,34 +1,55 @@
-<div class="activities-section">
+<section class="activities-section">
   <h2 class="section-title">HOẠT ĐỘNG HỌC TẬP TẠI DENGFUCHINESE EDUCATION</h2>
 
-  <div class="activities-slider">
-    <div class="slider-container">
-      <div
-        class="slides"
-        [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
-      >
-        <div class="slide" *ngFor="let activity of activities">
+  <div class="activities-slider"
+       (touchstart)="onTouchStart($event)"
+       (touchmove)="onTouchMove($event)"
+       (touchend)="onTouchEnd()">
+    <!-- Loading state -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Đang tải dữ liệu...</p>
+    </div>
+
+    <!-- Error state -->
+    <div *ngIf="error" class="error-state">
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Content -->
+    <div *ngIf="!isLoading && !error" class="slider-container">
+      <div class="slides" [ngStyle]="slideStyle">
+        <div class="slide" *ngFor="let activity of activities; trackBy: trackByFn">
           <div class="activity-card">
-            <img
-              [src]="'https://lh3.googleusercontent.com/d/' + activity.drive_id"
-              alt="activity.title"
-            />
+            <img [src]="'https://lh3.googleusercontent.com/d/' + activity.drive_id"
+                 [alt]="activity.file_name">
           </div>
         </div>
       </div>
 
-      <button class="nav-button prev" (click)="prev()">❮</button>
-      <button class="nav-button next" (click)="next()">❯</button>
+      <!-- Navigation buttons -->
+      <button *ngIf="totalSlides > 1"
+              class="nav-button prev"
+              (click)="prev()"
+              aria-label="Previous">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button *ngIf="totalSlides > 1"
+              class="nav-button next"
+              (click)="next()"
+              aria-label="Next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
 
-      <div class="dots">
-        <span
-          class="dot"
-          *ngFor="let i of [].constructor(totalSlides); let idx = index"
-          [class.active]="idx === currentIndex"
-          (click)="setCurrentSlide(idx)"
-          (keydown.enter)="setCurrentSlide(idx)"
-        ></span>
+      <!-- Dots navigation -->
+      <div *ngIf="totalSlides > 1" class="dots">
+        <span *ngFor="let i of getDots(); let idx = index"
+              class="dot"
+              [class.active]="idx === currentIndex"
+              (click)="setCurrentSlide(idx)"
+              role="button"
+              [attr.aria-label]="'Go to slide ' + (idx + 1)"></span>
       </div>
     </div>
   </div>
-</div>
+</section>
