@@ -1,0 +1,73 @@
+<div class="bg-header"></div>
+<div class="document-list-container">
+    <div class="text-center">
+        <h1 class="page-title">Du học Trung Quốc</h1>
+        <p class="page-subtitle">Thông tin du học Trung Quốc chi tiết và đầy đủ nhất</p>
+    </div>
+
+    <!-- Category filter -->
+    <div class="category-filter">
+        <button (click)="onCategoryChange(undefined)"
+                [class.active]="!categoryId"
+                class="category-btn">
+            Tất cả
+        </button>
+        <button *ngFor="let category of categories"
+                (click)="onCategoryChange(category.id)"
+                [class.active]="categoryId === category.id"
+                class="category-btn">
+            {{ category.ct_name }}
+        </button>
+    </div>
+
+    <!-- Loading state -->
+    <div *ngIf="isLoading" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Error state -->
+    <div *ngIf="error" class="error-message">
+        <span>{{ error }}</span>
+    </div>
+
+    <!-- Study Abroad grid -->
+    <div *ngIf="!isLoading && !error" class="documents-grid">
+        <div *ngFor="let item of getCurrentPageItems()" class="document-card">
+            <!-- Image -->
+            <div class="document-image">
+                <img [src]="getImageUrl(item.image)" [alt]="item.title">
+            </div>
+
+            <!-- Content -->
+            <div class="document-content">
+                <h2 class="document-title">{{ item.title }}</h2>
+                <p class="document-description">{{ getDescription(item.content) }}</p>
+
+                <!-- Metadata -->
+                <div class="document-footer">
+                    <span class="document-date">{{ formatDate(item.created_at) }}</span>
+                    <a [routerLink]="['/du-hoc-trung-quoc', item.id]" class="view-btn">
+                        <i class="fas fa-eye"></i>
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty state -->
+    <div *ngIf="!isLoading && !error && getCurrentPageItems().length === 0" class="empty-state">
+        <p>Không có bài viết nào.</p>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="totalPages > 1" class="pagination">
+        <button *ngFor="let page of [].constructor(totalPages); let i = index"
+                [class.active]="currentPage === i + 1"
+                class="page-btn"
+                [disabled]="currentPage === i + 1"
+                (click)="onPageChange(i + 1)">
+            {{ i + 1 }}
+        </button>
+    </div>
+</div>

@@ -59,7 +59,8 @@
               </a>
               <div class="dropdown-menu" [class.show]="isDuHocMenuOpen">
                 <a *ngFor="let category of categoriesDuHoc"
-                   [routerLink]="['/du-hoc-trung-quoc', category.id]"
+                   [routerLink]="['/du-hoc-trung-quoc']"
+                   [queryParams]="{category_id: category.id}"
                    (click)="closeMobileMenu()">
                   {{category.ct_name}}
                 </a>
@@ -72,7 +73,8 @@
               </a>
               <div class="dropdown-menu" [class.show]="isDocMenuOpen">
                 <a *ngFor="let category of categoriesDocument"
-                   [routerLink]="['/tai-lieu', category.id]"
+                   [routerLink]="['/tai-lieu']"
+                   [queryParams]="{category_id: category.id}"
                    (click)="closeMobileMenu()">
                   {{category.ct_name}}
                 </a>

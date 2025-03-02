@@ -6,7 +6,24 @@
     </h2>
   </div>
 
-  <div class="slider-container" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+  <!-- Loading state -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Đang tải dữ liệu...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+    <button class="retry-button" (click)="getTeachers()">
+      <i class="fas fa-sync-alt"></i>
+      Thử lại
+    </button>
+  </div>
+
+  <!-- Slider content -->
+  <div *ngIf="!isLoading && !error && teachers.length > 0" class="slider-container"
+       (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
     <button class="nav-button prev" (click)="prev()">
       <i class="fas fa-chevron-left"></i>
     </button>
@@ -18,7 +35,9 @@
              [class.prev]="i === currentIndex - 1 || (currentIndex === 0 && i === teachers.length - 1)"
              [class.next]="i === currentIndex + 1 || (currentIndex === teachers.length - 1 && i === 0)">
           <div class="teacher-image">
-            <img [src]="'https://lh3.googleusercontent.com/d/' + teacher.image?.drive_id" [alt]="teacher.tc_name">
+            <img [src]="getImageUrl(teacher)"
+                 [alt]="teacher.tc_name"
+                 (error)="onImageError($event)">
           </div>
           <h3 class="teacher-name">{{teacher.tc_name}}</h3>
           <div class="description-wrapper" *ngIf="teacher.description && i === currentIndex">
@@ -35,7 +54,6 @@
                   </div>
                   <div class="tooltip-body">{{teacher.description}}</div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -46,5 +64,10 @@
     <button class="nav-button next" (click)="next()">
       <i class="fas fa-chevron-right"></i>
     </button>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!isLoading && !error && teachers.length === 0" class="empty-state">
+    <p>Chưa có thông tin giảng viên.</p>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-
+import { TeacherResponse } from '../../models/teacher.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class TeacherSliderService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getTeachers(): Observable<any> {
-    return this.http.get(`${this.apiUrl}teachers/list?page=1&limit=100`);
+  getTeachers(): Observable<TeacherResponse> {
+    return this.http.get<TeacherResponse>(`${this.apiUrl}teachers/list?page=1&limit=100`);
   }
 }

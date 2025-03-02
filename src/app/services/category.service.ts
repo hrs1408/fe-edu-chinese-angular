@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CategoryResponse } from '../models/category';
+import { Category, CategoryResponse } from '../models/category';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -12,9 +12,15 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories(type: number): Observable<CategoryResponse> {
-    return this.http.get<CategoryResponse>(`${this.apiUrl}category/list-by-type`, {
-      params: { ct_type: type.toString() }
-    });
+  getCategories(limit: number = 20): Observable<CategoryResponse> {
+    return this.http.get<CategoryResponse>(`${this.apiUrl}category/list-by-type?ct_type=20`);
+  }
+
+  getDocumentCategories(): Observable<CategoryResponse> {
+    return this.http.get<CategoryResponse>(`${this.apiUrl}category/list-by-type?ct_type=30`);
+  }
+
+  getStudyAbroadCategories(): Observable<CategoryResponse> {
+    return this.http.get<CategoryResponse>(`${this.apiUrl}category/list-by-type?ct_type=50`);
   }
 }

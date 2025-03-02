@@ -1,0 +1,45 @@
+<div class="bg-header"></div>
+
+<div class="article-container" *ngIf="!isLoading && !error && document">
+    <!-- Article header -->
+    <div class="article-header">
+        <h1 class="article-title">{{ document.title }}</h1>
+        <div class="article-meta">
+            <span class="article-date">
+                <i class="fas fa-calendar-alt"></i>
+                {{ formatDate(document.created_at) }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Featured image -->
+    <div class="article-image" *ngIf="document.image">
+        <img [src]="getImageUrl(document.image)" [alt]="document.title">
+    </div>
+
+    <!-- Article content -->
+    <div class="article-content" [innerHTML]="sanitizeHtml(document.content)"></div>
+
+    <!-- Back button -->
+    <div class="back-button-container">
+        <a routerLink="/tai-lieu" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Quay lại danh sách
+        </a>
+    </div>
+</div>
+
+<!-- Loading state -->
+<div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Đang tải tài liệu...</p>
+</div>
+
+<!-- Error state -->
+<div *ngIf="error" class="error-container">
+    <p class="error-message">{{ error }}</p>
+    <a routerLink="/tai-lieu" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Quay lại danh sách
+    </a>
+</div>

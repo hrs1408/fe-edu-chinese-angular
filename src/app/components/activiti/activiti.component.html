@@ -1,55 +1,32 @@
 <section class="activities-section">
-  <h2 class="section-title">HOẠT ĐỘNG HỌC TẬP TẠI DENGFUCHINESE EDUCATION</h2>
+  <h2 class="section-title">HOẠT ĐỘNG HỌC TẬP TẠI TRUNG TÂM TIẾNG TRUNG DENGFU</h2>
 
-  <div class="activities-slider"
-       (touchstart)="onTouchStart($event)"
-       (touchmove)="onTouchMove($event)"
-       (touchend)="onTouchEnd()">
-    <!-- Loading state -->
-    <div *ngIf="isLoading" class="loading-state">
-      <div class="spinner"></div>
-      <p>Đang tải dữ liệu...</p>
-    </div>
+  <!-- Loading state -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Đang tải dữ liệu...</p>
+  </div>
 
-    <!-- Error state -->
-    <div *ngIf="error" class="error-state">
-      <p>{{ error }}</p>
-    </div>
+  <!-- Error state -->
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+  </div>
 
-    <!-- Content -->
-    <div *ngIf="!isLoading && !error" class="slider-container">
-      <div class="slides" [ngStyle]="slideStyle">
-        <div class="slide" *ngFor="let activity of activities; trackBy: trackByFn">
-          <div class="activity-card">
-            <img [src]="'https://lh3.googleusercontent.com/d/' + activity.drive_id"
-                 [alt]="activity.file_name">
-          </div>
+  <!-- Swiper -->
+  <div *ngIf="!isLoading && !error" class="activities-slider swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" *ngFor="let activity of activities">
+        <div class="activity-card">
+          <img [src]="getImageUrl(activity)" [alt]="activity.file_name">
         </div>
       </div>
-
-      <!-- Navigation buttons -->
-      <button *ngIf="totalSlides > 1"
-              class="nav-button prev"
-              (click)="prev()"
-              aria-label="Previous">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button *ngIf="totalSlides > 1"
-              class="nav-button next"
-              (click)="next()"
-              aria-label="Next">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-
-      <!-- Dots navigation -->
-      <div *ngIf="totalSlides > 1" class="dots">
-        <span *ngFor="let i of getDots(); let idx = index"
-              class="dot"
-              [class.active]="idx === currentIndex"
-              (click)="setCurrentSlide(idx)"
-              role="button"
-              [attr.aria-label]="'Go to slide ' + (idx + 1)"></span>
-      </div>
     </div>
+
+    <!-- Navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- Pagination -->
+    <div class="swiper-pagination"></div>
   </div>
 </section>

@@ -26,6 +26,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
+import { DocumentListComponent } from './pages/document-list/document-list.component';
+import { StudyAbroadListComponent } from './pages/study-abroad-list/study-abroad-list.component';
+import { StudyAbroadDetailComponent } from './pages/study-abroad-detail/study-abroad-detail.component';
+import { DocumentDetailComponent } from './pages/document-detail/document-detail.component';
+import { ContactButtonsComponent } from './components/contact-buttons/contact-buttons.component';
+import { ScrollRevealDirective } from './directives/scroll-reveal.directive';
 
 register();
 
@@ -48,7 +54,13 @@ register();
     PostDetailComponent,
     CoursesComponent,
     RegisterComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    DocumentListComponent,
+    StudyAbroadListComponent,
+    StudyAbroadDetailComponent,
+    DocumentDetailComponent,
+    ContactButtonsComponent,
+    ScrollRevealDirective
   ],
   imports: [
     BrowserModule,

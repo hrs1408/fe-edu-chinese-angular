@@ -1,0 +1,45 @@
+<div class="bg-header"></div>
+
+<div class="article-container" *ngIf="!isLoading && !error && studyAbroad">
+    <!-- Article header -->
+    <div class="article-header">
+        <h1 class="article-title">{{ studyAbroad.title }}</h1>
+        <div class="article-meta">
+            <span class="article-date">
+                <i class="fas fa-calendar-alt"></i>
+                {{ formatDate(studyAbroad.created_at) }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Featured image -->
+    <div class="article-image" *ngIf="studyAbroad.image">
+        <img [src]="getImageUrl(studyAbroad.image)" [alt]="studyAbroad.title">
+    </div>
+
+    <!-- Article content -->
+    <div class="article-content" [innerHTML]="sanitizeHtml(studyAbroad.content)"></div>
+
+    <!-- Back button -->
+    <div class="back-button-container">
+        <a routerLink="/du-hoc-trung-quoc" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Quay lại danh sách
+        </a>
+    </div>
+</div>
+
+<!-- Loading state -->
+<div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Đang tải bài viết...</p>
+</div>
+
+<!-- Error state -->
+<div *ngIf="error" class="error-container">
+    <p class="error-message">{{ error }}</p>
+    <a routerLink="/du-hoc-trung-quoc" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Quay lại danh sách
+    </a>
+</div>

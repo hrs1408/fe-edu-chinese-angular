@@ -1,11 +1,15 @@
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { HeaderService } from './header.service';
+import { Subject, forkJoin } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   isHeaderSticky: boolean = false;
   isMobileMenuOpen: boolean = false;
   isCourseMenuOpen: boolean = false;
@@ -22,33 +26,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Check initial scroll position
     this.checkScroll();
-    this.getCategoriesCourse();
-    this.getCategoriesDocument();
-    this.getCategoriesIntruction();
-    this.getCategoriesDuHoc();
+    this.loadAllCategories();
   }
 
-  getCategoriesCourse() {
-    this.headerService.getCategoriesCourseById(20).subscribe((categories) => {
-      this.categoriesCourse = categories.data;
-    });
-  }
-
-  getCategoriesDocument() {
-    this.headerService.getCategoriesCourseById(30).subscribe((categories) => {
-      this.categoriesDocument = categories.data;
-    });
-  }
-
-  getCategoriesIntruction() {
-    this.headerService.getCategoriesCourseById(40).subscribe((categories) => {
-      this.categoriesIntruction = categories.data;
-    });
-  }
-
-  getCategoriesDuHoc() {
-    this.headerService.getCategoriesCourseById(50).subscribe((categories) => {
-      this.categoriesDuHoc = categories.data;
+  private loadAllCategories(): void {
+    forkJoin({
+      course: this.headerService.getCategoriesCourseById(20),
+      document: this.headerService.getCategoriesCourseById(30),
+      instruction: this.headerService.getCategoriesCourseById(40),
+      duHoc: this.headerService.getCategoriesCourseById(50)
+    }).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(result => {
+      this.categoriesCourse = result.course.data;
+      this.categoriesDocument = result.document.data;
+      this.categoriesIntruction = result.instruction.data;
+      this.categoriesDuHoc = result.duHoc.data;
     });
   }
 
@@ -95,6 +88,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
     document.body.classList.remove('menu-open');
   }
 }
